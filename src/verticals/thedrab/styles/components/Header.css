@@ -1,0 +1,18 @@
+.Header {
+  background-color: #fff;
+  color: #000;
+  padding: 1lh 0;
+
+  &__container {
+    display: flex;
+  }
+
+  &__logo {
+    display: block;
+    width: 140px;
+  }
+
+  &__nav {
+    flex: 1 1 auto;
+  }
+}

@@ -1,0 +1,10 @@
+:root {
+  
+  /* stylelint-disable value-keyword-case */
+  --typeface__headline: 'Lato', sans-serif;
+  --typeface__display: 'Source Sans Pro', sans-serif;
+  --typeface__copy: 'Source Sans Pro', sans-serif;
+  /* stylelint-enable value-keyword-case */
+
+  font: 18px / 1.5 var(--type__secondary);
+}

@@ -1,0 +1,10 @@
+.Footer {
+  background-color: #2a2d37;
+  color: #efefef;
+  padding-bottom: 1rem;
+  padding-top: 1.5rem;
+
+  &__tag {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,8 @@
+.Footer {
+  padding-bottom: 1rem;
+  padding-top: 1.5rem;
+
+  &__tag {
+    font-size: 0.9rem;
+  }
+}

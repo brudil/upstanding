@@ -1,0 +1,41 @@
+.Document {
+  font-family: var(--typeface__copy);
+  font-size: 1.2rem;
+  line-height: 1.66;
+
+  & .DocumentSection:first-child .TextBlock:first-child {
+    &::first-letter {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+  }
+
+  & p {
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
+
+  & h1 {
+    font-size: ms(2) rem;
+    margin-bottom: ms(0);
+    margin-top: ms(0);
+
+    @media screen and (min-width: 820px) {
+      font-size: ms(2.5) rem;
+    }
+
+    @media screen and (min-width: 1024px) {
+      font-size: ms(3) rem;
+    }
+  }
+
+  & h2 {
+    font-size: ms(2.5) rem;
+  }
+
+  & a {
+    border-bottom: var(--color__accent) 3px solid;
+    color: var(--color__secondary);
+    text-decoration: none;
+  }
+}

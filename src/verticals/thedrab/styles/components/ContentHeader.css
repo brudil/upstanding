@@ -1,0 +1,10 @@
+.ContentHeader {
+  margin-bottom: 1rem;
+
+  &__headline {
+    font-family: var(--typeface__headline);
+    font-size: 3.6rem;
+    font-weight: 500;
+    margin: 0;
+  }
+}

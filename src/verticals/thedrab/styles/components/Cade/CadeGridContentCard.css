@@ -1,0 +1,40 @@
+@import '../../core/color.css';
+
+.CadeGridContentCard {
+  margin-bottom: 2.5rem;
+
+  & > a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  &__headline {
+    font-family: var(--typeface__headline);
+    color: var(--color__accent);
+    font-weight: 500;
+    font-size: ms(2)rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  &__poster {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  &__section-label {
+    background: var(--color__peter);
+    color: #fff;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: ms(-1)rem;
+    padding: 0.4rem 1rem;
+  }
+
+  &__meta {
+    color: var(--color__peter);
+    font-size: ms(-1)rem;
+    padding-top: ms(-2)rem;
+  }
+}

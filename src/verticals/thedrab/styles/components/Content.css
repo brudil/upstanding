@@ -1,0 +1,25 @@
+@import '../core/color.css';
+
+.Content {
+  &__body {
+    max-width: 560px;
+  }
+
+  &__title {
+    font-weight: 900;
+    font-style: italic;
+    font-size: 3rem;
+    font-family: "filson-soft";
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  &__kicker {
+    text-transform: uppercase;
+    font-family: "filson-soft";
+  }
+
+  &__meta {
+    margin-bottom: 2.5rem;
+  }
+}
