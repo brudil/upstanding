@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Universial Redux application for the frontend of upstanding.com.",
   "main": "webpack.base.config.js",
+  "engines": {
+    "node": "8.1.x"
+  },
   "dependencies": {
     "@brudil/drafty-constants": "^1.1.0",
     "assets-webpack-plugin": "^3.5.1",
@@ -93,7 +96,8 @@
     "coverage": "babel-node node_modules/.bin/isparta cover --report text --report html node_modules/.bin/_mocha -- --reporter dot",
     "dist": "export NODE_ENV=production && `npm bin`/webpack",
     "serve": "NODE_ENV=development `npm bin`/webpack-dev-server --config webpack.dev.config --history-api-fallback --hot --port 8088",
-    "ss": "NODE_ENV=development nodemon src/server-entry.js"
+    "ss": "NODE_ENV=development nodemon src/server-entry.js",
+    "heroku-postbuild": "NODE_ENV=production `npm bin`/webpack --config=webpack.prod.config"
   },
   "repository": {
     "type": "git",
