@@ -16,7 +16,7 @@ import {
 import { renderToString } from 'react-dom/server';
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
 import { StaticRouter } from 'react-router';
-import raven from 'raven';
+import Raven from 'raven';
 import Html from './core/components/Html';
 import forceSsl from './server/force-ssl';
 
@@ -85,6 +85,10 @@ function getClientVerticalConfig(vertical) {
 
 export default function server({ verticals, port }) {
   const app = express();
+
+  Raven.config(
+    'https://d66a04a503884527974744137198af8b:f208cb25f879498191f64f06d678f2c6@app.getsentry.com/89728'
+  ).install();
 
   const isProduction = process.env.NODE_ENV === 'production';
 
@@ -178,11 +182,7 @@ export default function server({ verticals, port }) {
   }
 
   if (isProduction) {
-    app.use(
-      raven.middleware.express.requestHandler(
-        'https://d66a04a503884527974744137198af8b:f208cb25f879498191f64f06d678f2c6@app.getsentry.com/89728'
-      )
-    );
+    app.use(Raven.requestHandler());
   }
 
   app.get('/.well-known/acme-challenge/:id', (req, res) => {
@@ -197,11 +197,7 @@ export default function server({ verticals, port }) {
   app.use(handleRender);
 
   if (isProduction) {
-    app.use(
-      raven.middleware.express.errorHandler(
-        'https://d66a04a503884527974744137198af8b:f208cb25f879498191f64f06d678f2c6@app.getsentry.com/89728'
-      )
-    );
+    app.use(Raven.errorHandler());
   }
 
   app.use(onError);
