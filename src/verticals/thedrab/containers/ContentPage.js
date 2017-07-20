@@ -46,6 +46,7 @@ class ContentPage extends React.Component {
                 <Byline
                   className="ContentHeader__byline"
                   authors={content.authors}
+                  publishedDate={container.publishedDate}
                 />
               </div>
             </div>
@@ -81,6 +82,7 @@ const ContentPageData = gql`
     vertical(identifier: $identifier) {
       content(contentId: $contentId) {
         contentId
+        publishedDate
         content {
           headline
           kicker
