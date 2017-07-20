@@ -1,10 +1,26 @@
 :root {
   
   /* stylelint-disable value-keyword-case */
-  --typeface__headline: 'Lato', sans-serif;
-  --typeface__display: 'Source Sans Pro', sans-serif;
-  --typeface__copy: 'Source Sans Pro', sans-serif;
+  --typeface__headline: 'filson-soft', sans-serif;
+  --typeface__display: -apple-system, BlinkMacSystemFont,
+  "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+  "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;;
+  --typeface__copy: -apple-system, BlinkMacSystemFont,
+  "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+  "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;;
   /* stylelint-enable value-keyword-case */
 
-  font: 18px / 1.5 var(--type__secondary);
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: var(--typeface__display);
+
+  @media (--large) {
+    font-size: 17px;
+  }
+
+  @media (--extra-large) {
+    font-size: 18px;
+  }
 }

@@ -16,4 +16,6 @@ body {
   background-color: var(--color__background);
   color: var(--color__text-base);
   font-family: var(--typeface__display);
+  margin: 0;
+  padding: 0;
 }
