@@ -16,6 +16,7 @@ import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ReactGA from 'react-ga';
 import Raven from 'raven-js';
+import ScrollToTop from '../components/ScrollToTop';
 
 function client({ name, slug, Application, tracking }) {
   process.env.LOWDOWN_VERTICAL_IDENTIFIER = slug;
@@ -79,7 +80,9 @@ function client({ name, slug, Application, tracking }) {
   ReactDOM.render(
     <ApolloProvider store={store} client={aClient}>
       <Router>
-        <Application />
+        <ScrollToTop>
+          <Application />
+        </ScrollToTop>
       </Router>
     </ApolloProvider>,
     document.getElementById('app')
