@@ -11,7 +11,8 @@
   &__headline {
     font-family: var(--typeface__headline);
     color: var(--color__accent);
-    font-weight: 500;
+    font-weight: 700;
+    font-style: italic;
     font-size: ms(2)rem;
     margin-top: 0.5rem;
     margin-bottom: 1rem;

@@ -1,10 +1,10 @@
 .CadeHeroContent {
-  font-size: 2.3rem;
+  font-size: 2rem;
   margin-bottom: 1lh;
   position: relative;
 
   @media screen and (min-width: 1280px) {
-    font-size: 2.6rem;
+    font-size: 2.2rem;
   }
 
   & > a {
@@ -13,7 +13,8 @@
 
   &__headline {
     font-family: var(--typeface__headline);
-    font-weight: bold;
+    font-weight: 700;
+    font-style: italic;
     color: var(--color__accent);
 
     @media screen and (min-width: 1024px) {
