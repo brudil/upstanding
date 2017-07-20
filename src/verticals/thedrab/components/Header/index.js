@@ -11,7 +11,7 @@ function Header() {
         <Link to="/" className="Header__logo">
           <Logo />
         </Link>
-        <span>
+        <span className="Header__tagline">
           {sample(taglines)}
         </span>
       </div>

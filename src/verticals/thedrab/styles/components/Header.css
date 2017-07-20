@@ -5,6 +5,7 @@
 
   &__container {
     display: flex;
+    align-items: flex-end;
   }
 
   &__logo {
@@ -14,5 +15,13 @@
 
   &__nav {
     flex: 1 1 auto;
+  }
+
+  &__tagline {
+    font-size: 0.9rem;
+    font-style: italic;
+    padding-bottom: 0.2rem;
+    padding-left: 0.2rem;
+    color: gray;
   }
 }
