@@ -14,8 +14,7 @@
 
   &__headline {
     font-family: var(--typeface__headline);
-    font-weight: 700;
-    font-style: italic;
+    font-weight: 600;
     color: var(--color__accent);
 
     @media screen and (min-width: 1024px) {

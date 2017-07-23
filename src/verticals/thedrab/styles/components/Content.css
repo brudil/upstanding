@@ -7,17 +7,16 @@
   }
 
   &__title {
-    font-weight: 900;
-    font-style: italic;
+    font-weight: 600;
     font-size: 3rem;
-    font-family: "filson-soft";
+    font-family: var(--typeface__headline);
     margin: 0;
     line-height: 1.2;
   }
 
   &__kicker {
     text-transform: uppercase;
-    font-family: "filson-soft";
+    font-family: var(--typeface__headline);
   }
 
   &__meta {
