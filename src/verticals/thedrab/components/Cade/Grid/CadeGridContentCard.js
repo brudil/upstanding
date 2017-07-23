@@ -13,7 +13,8 @@ const forms = {
 };
 
 function FrontGridContent(props) {
-  const { content } = props;
+  const { content: container } = props;
+  const content = container.content;
   const imageSettings = {
     w: 281,
     h: 171,
@@ -26,12 +27,9 @@ function FrontGridContent(props) {
   return (
     <div className={cx('CadeGridContentCard', props.className)}>
       <Link to={`/${forms[content.form]}/${content.slug}-${content.id}`}>
-        <div className="CadeGridContentCard__section-label">
-          {content.section.title}
-        </div>
         <FluidImage
           className="CadeGridContentCard__poster"
-          src={imgixURL(content.poster_image.resource_name, imageSettings)}
+          src={imgixURL(content.posterImage.resourceName, imageSettings)}
           role="presentation"
           ratio={171 / 281}
         />
