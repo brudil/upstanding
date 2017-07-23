@@ -6,10 +6,10 @@ import FluidImage from '../../FluidImage';
 import FrontMeta from '../../FrontMeta';
 
 const forms = {
-  1: 'article',
-  2: 'video',
-  3: 'interactive',
-  4: 'gallery',
+  ARTICLE: 'article',
+  VIDEO: 'video',
+  INTERACTIVE: 'interactive',
+  GALLERY: 'gallery',
 };
 
 function FrontGridContent(props) {
@@ -26,7 +26,9 @@ function FrontGridContent(props) {
   };
   return (
     <div className={cx('CadeGridContentCard', props.className)}>
-      <Link to={`/${forms[content.form]}/${content.slug}-${content.id}`}>
+      <Link
+        to={`/${forms[content.form]}/${content.slug}-${container.contentId}`}
+      >
         <FluidImage
           className="CadeGridContentCard__poster"
           src={imgixURL(content.posterImage.resourceName, imageSettings)}
