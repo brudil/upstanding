@@ -7,5 +7,12 @@ export default [
   'The content equivalent of carbs',
   'Your life. Our ad views.',
   'Too big for our news boots',
-  'New media means new standards of journalism'
+  'New media means new standards of journalism',
+  'Writing things for you to read',
+  'Making a short story long',
+  'Breaking News',
+  'Finger clickin’ good',
+  'A blessing in a really good disguise',
+  'To duplicity and beyond',
+  'Post-truth, pre-fact',
 ];
