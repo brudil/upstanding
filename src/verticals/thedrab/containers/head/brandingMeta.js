@@ -9,6 +9,6 @@ export default [
   },
   {
     name: 'theme-color',
-    content: '#ff0000',
+    content: '#6D4D2D',
   },
 ];

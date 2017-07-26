@@ -8,18 +8,24 @@
 
   &__title {
     font-weight: 600;
-    font-size: 3rem;
+    font-size: 2.4rem;
     font-family: var(--typeface__headline);
     margin: 0;
-    line-height: 1.2;
+    line-height: 1;
+    padding-bottom: 1rem;
+    color: var(--color__accent)
   }
 
   &__kicker {
     text-transform: uppercase;
     font-family: var(--typeface__headline);
+    font-weight: 700;
   }
 
   &__meta {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #6A6A6A;
+    font-family: var(--typeface__headline);
+    font-weight: 500;
   }
 }

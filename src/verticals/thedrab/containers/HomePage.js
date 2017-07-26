@@ -35,6 +35,7 @@ const HomePageData = gql`
         edges {
           node {
             contentId
+            publishedDate
             content {
               headline
               kicker
@@ -42,6 +43,10 @@ const HomePageData = gql`
               authors {
                 id
                 name
+              }
+              section {
+                slug
+                title
               }
               form
               slug

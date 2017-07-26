@@ -15,6 +15,13 @@ function ImageBlock({ data, resources }) {
       />
       <figcaption>
         {data.caption.text}
+        {image.creditUrl
+          ? <a href={image.creditUrl}>
+              {image.creditTitle || 'Credit'}
+            </a>
+          : <span>
+              {image.creditTitle}
+            </span>}
       </figcaption>
     </figure>
   );

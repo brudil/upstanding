@@ -1,0 +1,98 @@
+.FrontsContent {
+  font-family: var(--typeface__headline);
+  position: relative;
+
+  &__info {
+    background-color: #ffffff;
+    position: relative;
+    margin-left: auto;
+    box-sizing: border-box;
+    padding: 0.3em;
+    top: 0;
+    left: 0;
+    transition: top 300ms ease, left 300ms ease;
+    padding-bottom: 1rem;
+  }
+
+  &__image-container {
+    bottom: 0;
+    right: 0;
+    transition: bottom 300ms ease, right 300ms ease;
+  }
+
+  &__meta {
+    font-size: 0.9rem;
+    color: #6A6A6A;
+
+    & a {
+      color: #6A6A6A;
+    }
+  }
+
+  &__kicker {
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-right: 0.5em;
+  }
+
+  &__date {
+    font-style: italic;
+    padding-left: 0.5em;
+  }
+
+  &__headline {
+    margin: 0;
+    font-size: 1.4em;
+    line-height: 1.2em;
+    font-weight: 600;
+
+    &-link {
+      color: var(--color__accent);
+      text-decoration: none;
+    }
+  }
+
+  &__faux-link {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+  }
+}
+
+.FrontsContent--hero {
+  font-size: 1.4rem;
+}
+
+.FrontsContent--grid {
+  font-size: 1rem;
+}
+
+.FrontsContent--hero .FrontsContent {
+  &__info {
+    margin-top: -4rem;
+    width: 80%;
+  }
+}
+
+.FrontsContent:hover .FrontsContent {
+  &__info {
+    left: -0.25em;
+    top: -0.25em;
+  }
+
+  &__image-container {
+    right: -0.25em;
+    bottom: -0.25em;
+  }
+}
+
+
+.FrontsContent--grid .FrontsContent {
+  &__info {
+    margin-top: -2rem;
+    width: calc(100% - 30px);
+  }
+}

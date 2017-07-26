@@ -40,6 +40,7 @@
     "postcss-lh": "^1.1.4",
     "postcss-loader": "^2.0.6",
     "postcss-modular-scale": "^2.5.2",
+    "query-string": "^4.3.4",
     "raven": "^2.1.0",
     "raven-js": "^3.17.0",
     "react": "^15.6.1",

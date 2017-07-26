@@ -35,7 +35,12 @@ function CadeHeroContent(props) {
     >
       <Link
         to={`/${forms[content.form]}/${content.slug}-${container.contentId}`}
-      >
+      >const forms = {
+        ARTICLE: 'article',
+        VIDEO: 'video',
+        INTERACTIVE: 'interactive',
+        GALLERY: 'gallery',
+      };
         <div className="CadeHeroContent__poster-container">
           <FluidImage
             className="CadeHeroContent__poster"

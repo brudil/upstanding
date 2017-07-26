@@ -9,9 +9,10 @@ import Byline from '../components/Byline';
 import LoadingIndicator from '../components/LoadingIndicator';
 import Headline from '../components/Headline';
 import FluidImage from '../components/FluidImage';
-import { imgixURL } from '../../../core/components/utils';
+import { imgixURL, imgixText } from '../../../core/components/utils';
 import { gql, graphql } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
+var Base64 = require('js-base64').Base64;
 
 class ContentPage extends React.Component {
   render() {
@@ -30,9 +31,38 @@ class ContentPage extends React.Component {
       h: imageHeight,
     });
 
+    const textBlend = imgixText({
+      fm: 'png',
+      textfit: 'max',
+      h: 630,
+      w: 1200,
+      txtfont64: new Buffer('Avenir Next Condensed,Bold Italic').toString(
+        'base64'
+      ),
+      txt64: new Buffer(content.headline).toString('base64').replace(/=/g, ''),
+      txtpad: 30,
+      bg: 'aa6D4D2D',
+      txtclr: 'fff',
+      txtsize: 80,
+    });
+
+    const sharer = imgixURL(content.posterImage.resourceName, {
+      fit: 'crop',
+      bm: 'normal',
+      markw: 220,
+      mark: 'https://drafty.imgix.net/50d2c118-344a-40be-9d13-47d7b2840292',
+      h: 630,
+      w: 1200,
+      markpad: 30,
+      blend64: new Buffer(textBlend).toString('base64'),
+    });
+
     return (
       <div className="Main">
-        <Helmet title={content.headline} />
+        <Helmet title={content.headline}>
+          <meta property="og:type" content="article" />
+          <meta property="og:image" content={sharer} />
+        </Helmet>
         <div className="ContentPage Container">
           <article>
             <div className="Content__meta">

@@ -1,6 +1,5 @@
-import { createQueryString } from '../utils';
+import qs from 'query-string'
 
-// eslint-disable-next-line
 export function imgixURL(resource, params = '') {
   const defaults = {
     usm: 12,
@@ -9,6 +8,11 @@ export function imgixURL(resource, params = '') {
     crop: 'entropy',
     auto: 'format',
   };
-  const qs = createQueryString({ ...params, ...defaults });
-  return `https://drafty.imgix.net/${resource}?${qs}`;
+  const query = qs.stringify({ ...params, ...defaults });
+  return `https://drafty.imgix.net/${resource}?${query}`;
+}
+
+export function imgixText(params = {}) {
+  const query = qs.stringify(params);
+  return `https://assets.imgix.net/~text?${query}`;
 }

@@ -43,3 +43,10 @@
 @import 'components/Cade/CadeGridContentCard.css';
 @import 'components/Cade/CadeHero.css'; 
 @import 'components/Cade/CadeHeroContent.css';
+
+/* Fronts */
+@import 'components/FrontsContent.css';
+@import 'components/FrontsContainer.css';
+
+/* Utils */
+@import 'utils/aspect.css';
