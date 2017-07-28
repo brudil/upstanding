@@ -17,6 +17,7 @@ import { renderToString } from 'react-dom/server';
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
 import { StaticRouter } from 'react-router';
 import Raven from 'raven';
+import interactiveFrame from 'interactive-frame';
 import Html from './core/components/Html';
 import forceSsl from './server/force-ssl';
 
@@ -176,6 +177,15 @@ export default function server({ verticals, port }) {
   }
 
   app.use('/dist', express.static(`${__dirname}/../dist`));
+  app.use('/interactive-frame/:slug/v:rid', (req, res) => {
+    const interactiveSlug = req.params.slug;
+    const interactiveReleaseId = req.params.rid;
+    res.send(
+      interactiveFrame('latest')(
+        `https://interactives.theprate.com/${interactiveSlug}/v${interactiveReleaseId}/bundle.js`
+      )
+    );
+  });
   app.use(forceSsl);
   app.use(handleRender);
 
