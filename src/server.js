@@ -67,16 +67,6 @@ function getVertical(host, verticals) {
 
   return null;
 }
-function getVerifyValue(id, verticals) {
-  // eslint-disable-next-line
-  for (const vertical of verticals) {
-    if (vertical.verify.hasOwnProperty(id)) {
-      return vertical.verify[id];
-    }
-  }
-
-  return null;
-}
 
 function getClientVerticalConfig(vertical) {
   const config = _.pick(vertical, ['name', 'lowdown', 'tracking', 'slug']);
@@ -184,13 +174,6 @@ export default function server({ verticals, port }) {
   if (isProduction) {
     app.use(Raven.requestHandler());
   }
-
-  app.get('/.well-known/acme-challenge/:id', (req, res) => {
-    const verifyId = req.params.id;
-    const verifyValue = getVerifyValue(verifyId, verticals);
-
-    res.send(verifyValue);
-  });
 
   app.use('/dist', express.static(`${__dirname}/../dist`));
   app.use(forceSsl);
