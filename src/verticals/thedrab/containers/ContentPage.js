@@ -11,16 +11,23 @@ import Headline from '../components/Headline';
 import FluidImage from '../components/FluidImage';
 import { imgixURL, imgixText } from '../../../core/components/utils';
 import { gql, graphql } from 'react-apollo';
-import { withRouter } from 'react-router-dom';
-var Base64 = require('js-base64').Base64;
+import { Redirect, withRouter } from 'react-router-dom';
+import getPathForContent from '../utils/getPathForContent';
+import ErrorPage from '../../../core/components/ErrorPage';
+const Base64 = require('js-base64').Base64;
 
 class ContentPage extends React.Component {
   render() {
-    const { data: { loading }, data } = this.props;
+    const { data: { loading, error }, data } = this.props;
 
     if (loading) {
       return <LoadingIndicator />;
     }
+
+    if (error) {
+      return <ErrorPage statusCode={404} />;
+    }
+
     const container = data.vertical.content;
     const content = container.content;
 
@@ -57,11 +64,26 @@ class ContentPage extends React.Component {
       blend64: new Buffer(textBlend).toString('base64'),
     });
 
+    if (
+      this.props.match.params.form !== content.form.toLowerCase() ||
+      this.props.match.params[0] !== content.slug
+    ) {
+      return <Redirect status={301} to={getPathForContent(container)} />;
+    }
+
     return (
       <div className="Main">
-        <Helmet title={content.headline}>
+        <Helmet title={content.headline} encodeSpecialCharacters={false}>
+          <meta
+            property="og:url"
+            content={`https://thedrab.co${getPathForContent(container)}`}
+          />
           <meta property="og:type" content="article" />
-          <meta property="og:image" content={sharer} />
+          <meta
+            property="og:image"
+            content={`/external/ogimage/${container.contentId}/`}
+          />
+          <meta property="og:description" content={content.standfirst} />
         </Helmet>
         <div className="ContentPage Container">
           <article>
@@ -116,6 +138,7 @@ const ContentPageData = gql`
         content {
           headline
           kicker
+          standfirst
           tone
           authors {
             id

@@ -4,13 +4,7 @@ import formatDistance from 'date-fns/formatDistance';
 import PropTypes from 'prop-types';
 import Image from '../Image';
 import { Link } from 'react-router-dom';
-
-const forms = {
-  ARTICLE: 'article',
-  VIDEO: 'video',
-  INTERACTIVE: 'interactive',
-  GALLERY: 'gallery',
-};
+import getPathForContent from '../../utils/getPathForContent';
 
 function ComputedKicker({ content }) {
   if (content.form === 'INTERACTIVE') {
@@ -56,9 +50,7 @@ function FrontsContent({ content: container, hero = false, grid = false }) {
         <h1 className="FrontsContent__headline">
           <Link
             className="FrontsContent__headline-link"
-            to={`/${forms[
-              content.form
-            ]}/${content.slug}-${container.contentId}`}
+            to={getPathForContent(container)}
           >
             {content.headline}
           </Link>
@@ -66,7 +58,7 @@ function FrontsContent({ content: container, hero = false, grid = false }) {
       </div>
       <Link
         className="FrontsContent__faux-link"
-        to={`/${forms[content.form]}/${content.slug}-${container.contentId}`}
+        to={getPathForContent(container)}
       />
     </div>
   );
