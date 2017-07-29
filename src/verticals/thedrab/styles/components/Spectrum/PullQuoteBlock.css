@@ -1,0 +1,15 @@
+.PullQuoteBlock {
+  float: right;
+  max-width: 540px;
+  font-size: 2rem;
+  font-family: var(--typeface__headline);
+  position: relative;
+  font-weight: 600;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-left: 3px solid var(--color__secondary);
+  color: var(--color__accent);
+  line-height: 1.1;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { elementStream } from '../ElementStream';
 
 function ListSection({ data, resources }) {
+
   return (
     <section className="DocumentSection ListSection">
       <ul className="ListSection__list">

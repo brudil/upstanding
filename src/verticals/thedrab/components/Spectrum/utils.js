@@ -7,6 +7,8 @@ import ListSectionItem from './sections/ListSectionItem';
 import ImageBlock from './blocks/ImageBlock';
 import HeadingBlock from './blocks/HeadingBlock';
 import TextBlock from './blocks/TextBlock';
+import PullQuoteBlock from './blocks/PullQuoteBlock';
+import CanvasBlock from './blocks/CanvasBlock';
 
 const map = {
   // sections
@@ -18,6 +20,8 @@ const map = {
   image: ImageBlock,
   heading: HeadingBlock,
   text: TextBlock,
+  pullquote: PullQuoteBlock,
+  canvas: CanvasBlock,
 };
 
 export function getElementFromData(data, resources) {
@@ -25,9 +29,6 @@ export function getElementFromData(data, resources) {
     const Element = map[data._name];
     return <Element data={data} key={data._id} resources={resources} />;
   }
-  return (
-    <div>
-      Rendering issue {data._name}
-    </div>
-  );
+  console.warn('failed to render ', data._name);
+  return <hr />;
 }

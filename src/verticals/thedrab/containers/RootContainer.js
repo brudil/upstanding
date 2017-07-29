@@ -8,6 +8,10 @@ import brandingLinks from './head/brandingLinks';
 import brandingMeta from './head/brandingMeta';
 import HomePage from './HomePage';
 import ContentPage from './ContentPage';
+import FormFrontPage from './FormFrontPage';
+import ToneFrontPage from './ToneFrontPage';
+import SectionFrontPage from './SectionFrontPage';
+import AuthorFrontPage from './AuthorFrontPage';
 import NotFoundPage from './NotFoundPage';
 
 function RootContainer() {
@@ -28,8 +32,11 @@ function RootContainer() {
       <div className="Site__main">
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/section/:section" component={HomePage} />
+          <Route path="/form/:form" component={FormFrontPage} />
+          <Route path="/tone/:tone" component={ToneFrontPage} />
+          <Route path="/author/:author" component={AuthorFrontPage} />
           <Route path="/:form/**-:contentId" component={ContentPage} exact />
+          <Route path="/:section" component={SectionFrontPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </div>

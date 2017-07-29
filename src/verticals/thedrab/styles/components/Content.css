@@ -2,7 +2,6 @@
 
 .Content {
   &__body {
-    max-width: 560px;
     padding-top: 1.5rem;
   }
 
@@ -24,7 +23,7 @@
 
   &__meta {
     margin-bottom: 1.5rem;
-    color: #6A6A6A;
+    color: var(--color__secondary);
     font-family: var(--typeface__headline);
     font-weight: 500;
   }

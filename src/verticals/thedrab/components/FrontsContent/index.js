@@ -30,7 +30,6 @@ function FrontsContent({
   grid = false,
   square = false,
 }) {
-  console.log(container);
   const content = container.content;
   return (
     <div

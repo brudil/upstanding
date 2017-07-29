@@ -177,6 +177,9 @@ export default function server({ verticals, port }) {
   }
 
   app.use('/dist', express.static(`${__dirname}/../dist`));
+  app.use('/external', (req, res) => {
+    // handle asking vertical to generate ogimage.
+  });
   app.use('/interactive-frame/:slug/v:rid', (req, res) => {
     const interactiveSlug = req.params.slug;
     const interactiveReleaseId = req.params.rid;

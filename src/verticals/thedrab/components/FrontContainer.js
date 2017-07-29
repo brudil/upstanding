@@ -1,5 +1,6 @@
 import React from 'react';
 import FrontsContent from './FrontsContent';
+import { gql } from 'react-apollo';
 
 function FrontContainer(props) {
   const { content } = props;
@@ -29,6 +30,33 @@ function FrontContainer(props) {
 FrontContainer.propTypes = {
   content: React.PropTypes.array.isRequired,
   title: React.PropTypes.string.isRequired,
+};
+
+FrontContainer.fragments = {
+  content: gql`
+    fragment FrontsContent on Content {
+      contentId
+      publishedDate
+      content {
+        headline
+        kicker
+        tone
+        authors {
+          id
+          name
+        }
+        section {
+          slug
+          title
+        }
+        form
+        slug
+        posterImage {
+          resourceName
+        }
+      }
+    }
+  `,
 };
 
 export default FrontContainer;

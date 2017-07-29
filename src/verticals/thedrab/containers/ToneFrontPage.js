@@ -4,15 +4,23 @@ import FrontContainer from '../components/FrontContainer';
 import LoadingIndicator from '../components/LoadingIndicator';
 import { gql, graphql } from 'react-apollo';
 import { Helmet } from 'react-helmet';
+import FrontsHeader from '../components/FrontsHeader';
+import ErrorPage from "../components/ErrorPage";
+import NoContent from "../components/NoContent";
 
 class HomePage extends React.Component {
   render() {
-    const { data: { loading, vertical } } = this.props;
+    const { data: { loading, vertical, error } } = this.props;
     if (loading || !vertical) {
       return <LoadingIndicator />;
     }
-    const nodes = vertical.allContent.edges.map(edge => edge.node);
 
+    if (error) {
+      return <ErrorPage status={404} />
+
+    }
+
+    const nodes = vertical.allContent.edges.map(edge => edge.node);
     return (
       <div className="Main">
         <Helmet>
@@ -20,9 +28,11 @@ class HomePage extends React.Component {
           <meta property="og:image" content="" />
           <meta property="og:description" content={'The Drab'} />
         </Helmet>
+        <FrontsHeader title={`All our content with the tone of: ${this.props.match.params.tone}`} />
+
         {nodes.length > 0
           ? <FrontContainer title="Latest" content={nodes} />
-          : null}
+          : <NoContent />}
       </div>
     );
   }
@@ -35,9 +45,9 @@ HomePage.propTypes = {
 };
 
 const HomePageData = gql`
-  query FrontContent($identifier: String) {
+  query FrontContent($identifier: String, $tone: Tone) {
     vertical(identifier: $identifier) {
-      allContent {
+      allContent(tone: $tone) {
         edges {
           node {
             ...FrontsContent
@@ -50,11 +60,12 @@ const HomePageData = gql`
 `;
 
 const HomepageWithData = graphql(HomePageData, {
-  options: {
+  options: props => ({
     variables: {
       identifier: 'thedrab',
+      tone: props.match.params.tone.toUpperCase(),
     },
-  },
+  }),
 })(HomePage);
 
 export default HomepageWithData;

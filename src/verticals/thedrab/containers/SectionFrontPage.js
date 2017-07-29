@@ -4,15 +4,23 @@ import FrontContainer from '../components/FrontContainer';
 import LoadingIndicator from '../components/LoadingIndicator';
 import { gql, graphql } from 'react-apollo';
 import { Helmet } from 'react-helmet';
+import FrontsHeader from '../components/FrontsHeader';
+import ErrorPage from '../components/ErrorPage';
+import NoContent from '../components/NoContent';
 
 class HomePage extends React.Component {
   render() {
-    const { data: { loading, vertical } } = this.props;
-    if (loading || !vertical) {
+    const { data: { loading, vertical, error } } = this.props;
+    console.log(this.props);
+    if (loading) {
       return <LoadingIndicator />;
     }
-    const nodes = vertical.allContent.edges.map(edge => edge.node);
 
+    if (error) {
+      return <ErrorPage statusCode={404} />;
+    }
+
+    const nodes = vertical.section.allContent.edges.map(edge => edge.node);
     return (
       <div className="Main">
         <Helmet>
@@ -20,9 +28,11 @@ class HomePage extends React.Component {
           <meta property="og:image" content="" />
           <meta property="og:description" content={'The Drab'} />
         </Helmet>
+        <FrontsHeader title={`${this.props.match.params.section}`} />
+
         {nodes.length > 0
           ? <FrontContainer title="Latest" content={nodes} />
-          : null}
+          : <NoContent />}
       </div>
     );
   }
@@ -35,12 +45,24 @@ HomePage.propTypes = {
 };
 
 const HomePageData = gql`
-  query FrontContent($identifier: String) {
+  query FrontContent($identifier: String, $section: String) {
     vertical(identifier: $identifier) {
-      allContent {
-        edges {
-          node {
-            ...FrontsContent
+      section(slug: $section) {
+        title
+        slug
+        allTopics(last: 5) {
+          edges {
+            node {
+              title
+              slug
+            }
+          }
+        }
+        allContent {
+          edges {
+            node {
+              ...FrontsContent
+            }
           }
         }
       }
@@ -50,11 +72,12 @@ const HomePageData = gql`
 `;
 
 const HomepageWithData = graphql(HomePageData, {
-  options: {
+  options: props => ({
     variables: {
       identifier: 'thedrab',
+      section: props.match.params.section,
     },
-  },
+  }),
 })(HomePage);
 
 export default HomepageWithData;

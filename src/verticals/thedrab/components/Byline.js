@@ -1,6 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import formatDistance from 'date-fns/formatDistance';
+import { Link } from 'react-router-dom';
 
 function Byline(props) {
   const { authors, publishedDate } = props;
@@ -10,11 +11,17 @@ function Byline(props) {
       <span>Written by </span>
       {authors.map((author, index) =>
         <div className="Byline__author" key={author.id}>
-          {author.name}
-          <span>{index < authors.length - 1 ? ' and ' : ''}</span>
+          <Link className="Byline__link" to={`/author/${author.slug}`}>
+            {author.name}
+          </Link>
+          <span>
+            {index < authors.length - 1 ? ' and ' : ''}
+          </span>
         </div>
       )}
-      <span>, published {formatDistance(new Date(publishedDate), new Date())} ago</span>
+      <span>
+        , published {formatDistance(new Date(publishedDate), new Date())} ago
+      </span>
     </div>
   );
 }

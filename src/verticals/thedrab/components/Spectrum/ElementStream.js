@@ -15,6 +15,7 @@ function ElementStream({ stream, resources }) {
 
 ElementStream.propTypes = {
   stream: React.PropTypes.array.isRequired,
+  resources: React.PropTypes.object.isRequired,
 };
 
 export default ElementStream;

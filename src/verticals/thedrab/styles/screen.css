@@ -36,6 +36,9 @@
 @import 'components/Spectrum/Block.css';
 @import 'components/Spectrum/ListSection.css';
 @import 'components/Spectrum/TextBlock.css';
+@import 'components/Spectrum/ImageBlock.css';
+@import 'components/Spectrum/CanvasBlock.css';
+@import 'components/Spectrum/PullQuoteBlock.css';
 
 /* Cade */
 @import 'components/Cade/CadeSection.css';
@@ -47,6 +50,8 @@
 /* Fronts */
 @import 'components/FrontsContent.css';
 @import 'components/FrontsContainer.css';
+@import 'components/FrontsHeader.css';
+@import 'components/NoContent.css';
 
 /* Utils */
 @import 'utils/aspect.css';

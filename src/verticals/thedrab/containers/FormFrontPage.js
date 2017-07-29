@@ -4,6 +4,8 @@ import FrontContainer from '../components/FrontContainer';
 import LoadingIndicator from '../components/LoadingIndicator';
 import { gql, graphql } from 'react-apollo';
 import { Helmet } from 'react-helmet';
+import FrontsHeader from '../components/FrontsHeader';
+import NoContent from "../components/NoContent";
 
 class HomePage extends React.Component {
   render() {
@@ -12,7 +14,6 @@ class HomePage extends React.Component {
       return <LoadingIndicator />;
     }
     const nodes = vertical.allContent.edges.map(edge => edge.node);
-
     return (
       <div className="Main">
         <Helmet>
@@ -20,9 +21,13 @@ class HomePage extends React.Component {
           <meta property="og:image" content="" />
           <meta property="og:description" content={'The Drab'} />
         </Helmet>
+        <FrontsHeader
+          title={`All our content with the form of: ${this.props.match.params
+            .form}`}
+        />
         {nodes.length > 0
           ? <FrontContainer title="Latest" content={nodes} />
-          : null}
+          : <NoContent />}
       </div>
     );
   }
@@ -35,9 +40,9 @@ HomePage.propTypes = {
 };
 
 const HomePageData = gql`
-  query FrontContent($identifier: String) {
+  query FrontContent($identifier: String, $form: Form) {
     vertical(identifier: $identifier) {
-      allContent {
+      allContent(form: $form) {
         edges {
           node {
             ...FrontsContent
@@ -50,11 +55,12 @@ const HomePageData = gql`
 `;
 
 const HomepageWithData = graphql(HomePageData, {
-  options: {
+  options: props => ({
     variables: {
       identifier: 'thedrab',
+      form: props.match.params.form.toUpperCase(),
     },
-  },
+  }),
 })(HomePage);
 
 export default HomepageWithData;

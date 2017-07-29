@@ -1,0 +1,10 @@
+.FrontsHeader {
+
+  &__heading {
+    margin: 0;
+    padding-bottom: 1lh;
+    font-family: var(--typeface__headline);
+    text-transform: uppercase;
+    color: var(--color__secondary);
+  }
+}

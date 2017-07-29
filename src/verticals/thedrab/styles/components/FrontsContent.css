@@ -22,10 +22,10 @@
 
   &__meta {
     font-size: 0.9rem;
-    color: #6A6A6A;
+    color: var(--color__secondary);
 
     & a {
-      color: #6A6A6A;
+      color: var(--color__secondary);
     }
   }
 
@@ -55,7 +55,7 @@
   &__author-inline {
     font-weight: 400;
     font-style: italic;
-    color: #6A6A6A;
+    color: var(--color__secondary);
     font-size: 0.7em;
     display: block;
   }

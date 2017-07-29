@@ -70,7 +70,6 @@ class ContentPage extends React.Component {
     ) {
       return <Redirect status={301} to={getPathForContent(container)} />;
     }
-
     return (
       <div className="Main">
         <Helmet title={content.headline} encodeSpecialCharacters={false}>
@@ -146,12 +145,17 @@ const ContentPageData = gql`
           authors {
             id
             name
+            slug
           }
           form
           slug
           document
           posterImage {
             resourceName
+            creditTitle
+            creditUrl
+            width
+            height
           }
           resources {
             lowdownimages {
@@ -159,6 +163,8 @@ const ContentPageData = gql`
               resourceName
               width
               height
+              creditTitle
+              creditUrl
             }
             lowdowninteractives {
               slug
