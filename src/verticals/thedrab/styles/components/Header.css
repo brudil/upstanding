@@ -13,15 +13,46 @@
     width: 140px;
   }
 
+  &__logo-container {
+    display: block;
+  }
+
   &__nav {
-    flex: 1 1 auto;
+    margin-left: auto;
+  }
+
+  &__menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    padding-left: 2rem;
+    font-size: 1.4rem;
+  }
+
+  &__menu-item {
+    display: block;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+  }
+
+  &__menu-link {
+    text-decoration: none;
+    color: #6A6A6A;
+    &:hover {
+      border-bottom: 2px solid #6A6A6A;
+    }
   }
 
   &__tagline {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-style: italic;
     padding-bottom: 0.2rem;
     padding-left: 0.2rem;
     color: gray;
+    text-decoration: none;
+    display: block;
+    margin-top: -0.3rem;
+    margin-left: -0.3rem;
   }
 }

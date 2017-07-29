@@ -4,7 +4,8 @@ import ER from '../../../core/components/ErrorPage';
 const textMap = {
   404: {
     title: 'You win some, you lose some',
-    detail: "But this one is definitely lost because This page can't be found.",
+    detail:
+      "But this one you definitely lost because this page can't be found.",
   },
   500: {
     title: 'Not even a 2:2',

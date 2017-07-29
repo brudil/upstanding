@@ -27,10 +27,10 @@ function RootContainer() {
       <Header />
       <div className="Site__main">
         <Switch>
+          <Route exact path="/" component={HomePage} />
           <Route path="/section/:section" component={HomePage} />
           <Route path="/:form/**-:contentId" component={ContentPage} exact />
-          <Route path="/" component={HomePage} extact />
-          <Route path="*" component={NotFoundPage} />
+          <Route component={NotFoundPage} />
         </Switch>
       </div>
       <Footer />

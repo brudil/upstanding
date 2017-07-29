@@ -12,6 +12,20 @@
   overflow: hidden;
 }
 
+.u-aspect-43 {
+  padding-bottom: 75%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.u-aspect-12 {
+  padding-bottom: 50%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
 .u-aspect-fill {
   position: absolute;
   top: 0;

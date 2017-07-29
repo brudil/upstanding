@@ -24,17 +24,28 @@ function ComputedKicker({ content }) {
   );
 }
 
-function FrontsContent({ content: container, hero = false, grid = false }) {
+function FrontsContent({
+  content: container,
+  hero = false,
+  grid = false,
+  square = false,
+}) {
   console.log(container);
   const content = container.content;
   return (
     <div
       className={cx('FrontsContent', {
         'FrontsContent--hero': hero,
+        'FrontsContent--hero-square': square,
         'FrontsContent--grid': grid,
       })}
     >
-      <div className="FrontsContent__image-container u-aspect-166">
+      <div
+        className={cx('FrontsContent__image-container', {
+          'u-aspect-166': !square,
+          'u-aspect-169': square,
+        })}
+      >
         <Image resource={content.posterImage} />
       </div>
       <div className="FrontsContent__info">
@@ -54,6 +65,19 @@ function FrontsContent({ content: container, hero = false, grid = false }) {
           >
             {content.headline}
           </Link>
+          {content.tone === 'VIEWPOINT'
+            ? <span className="FrontsContent__author-inline">
+                {' '}by{' '}
+                {content.authors.map((author, index) =>
+                  <span>
+                    {author.name}
+                    <span>
+                      {index < content.authors.length - 1 ? ' and ' : ''}
+                    </span>
+                  </span>
+                )}
+              </span>
+            : null}
         </h1>
       </div>
       <Link

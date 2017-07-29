@@ -7,7 +7,7 @@
     position: relative;
     margin-left: auto;
     box-sizing: border-box;
-    padding: 0.3em;
+    padding: 0.2em 0.4em;
     top: 0;
     left: 0;
     transition: top 300ms ease, left 300ms ease;
@@ -42,7 +42,7 @@
 
   &__headline {
     margin: 0;
-    font-size: 1.4em;
+    font-size: 1.3em;
     line-height: 1.2em;
     font-weight: 600;
 
@@ -50,6 +50,14 @@
       color: var(--color__accent);
       text-decoration: none;
     }
+  }
+
+  &__author-inline {
+    font-weight: 400;
+    font-style: italic;
+    color: #6A6A6A;
+    font-size: 0.7em;
+    display: block;
   }
 
   &__faux-link {

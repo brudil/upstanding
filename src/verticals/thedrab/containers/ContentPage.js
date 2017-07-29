@@ -13,7 +13,7 @@ import { imgixURL, imgixText } from '../../../core/components/utils';
 import { gql, graphql } from 'react-apollo';
 import { Redirect, withRouter } from 'react-router-dom';
 import getPathForContent from '../utils/getPathForContent';
-import ErrorPage from '../../../core/components/ErrorPage';
+import ErrorPage from '../components/ErrorPage';
 const Base64 = require('js-base64').Base64;
 
 class ContentPage extends React.Component {
@@ -111,8 +111,11 @@ class ContentPage extends React.Component {
             <div className="Content__body">
               <Document
                 document={content.document}
-                resources={mapValues(content.resources, resources =>
-                  keyBy(resources, 'id')
+                resources={mapValues(content.resources, (resources, key) =>
+                  keyBy(
+                    resources,
+                    key === 'lowdowninteractives' ? 'slug' : 'id'
+                  )
                 )}
               />
             </div>
@@ -156,6 +159,10 @@ const ContentPageData = gql`
               resourceName
               width
               height
+            }
+            lowdowninteractives {
+              slug
+              releaseNumber
             }
           }
         }

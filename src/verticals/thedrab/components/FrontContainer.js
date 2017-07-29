@@ -3,14 +3,16 @@ import FrontsContent from './FrontsContent';
 
 function FrontContainer(props) {
   const { content } = props;
-  const heroContent = content.slice(0, 1);
-  const gridContent = content.length > 1 ? content.slice(1) : [];
+  const heroContent = content.slice(0, 2);
+  const gridContent = content.length > 2 ? content.slice(2) : [];
   return (
     <div className="FrontsContainer">
       <div className="Container">
         <div className="FrontsContainer__hero">
           <FrontsContent hero content={heroContent[0]} />
-          <div>Advert!</div>
+          {heroContent.length > 1
+            ? <FrontsContent hero square content={heroContent[1]} />
+            : null}
         </div>
       </div>
       <div className="Container">
