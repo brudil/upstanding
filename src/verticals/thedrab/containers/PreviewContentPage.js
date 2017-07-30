@@ -4,7 +4,6 @@ import LoadingIndicator from '../components/LoadingIndicator';
 import ContentPageComponent from '../components/ContentPage';
 import { gql, graphql } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
-import defaults from 'lodash/defaults';
 import ErrorPage from '../components/ErrorPage';
 
 class PreviewContentPage extends React.Component {
@@ -19,11 +18,16 @@ class PreviewContentPage extends React.Component {
       return <ErrorPage statusCode={404} />;
     }
 
-    const content = defaults({
-      posterImage: {
+    const content = { ...data.previewContent };
+
+    if (content.posterImage === null) {
+      content.posterImage = {
         resourceName: '0b2c01c8-13b3-4641-a75e-86d628f836e9',
-      },
-      authors: [
+      };
+    }
+
+    if (content.authors === null || content.authors.length >= 0) {
+      content.authors = [
         {
           name: 'Mr ADD A AUTHOR',
           slug: 'add-an-author',
@@ -32,10 +36,8 @@ class PreviewContentPage extends React.Component {
           name: 'Jodie NOT A NAME',
           slug: 'not-a-name',
         },
-      ],
-    }, data.previewContent);
-
-    console.log(content);
+      ];
+    }
 
     return (
       <ContentPageComponent
