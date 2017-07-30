@@ -44,9 +44,22 @@ class ContentPage extends React.Component {
     ) {
       return <Redirect status={301} to={getPathForContent(container)} />;
     }
+
+    const getPrep = (index, total) => {
+      if (index <= 0) {
+        return '';
+      }
+
+      return index <= total - 1 ? ' and ' : ', ';
+    };
+    const authorsString = content.authors.map(
+      (author, index) =>
+        `${getPrep(index, content.authors.length)}${author.name}`
+    );
+
     return (
       <div className="Main">
-        <Helmet title={content.headline} encodeSpecialCharacters={false}>
+        <Helmet title={content.shortHeadline} encodeSpecialCharacters={false}>
           <meta
             property="og:url"
             content={`https://thedrab.co${getPathForContent(container)}`}
@@ -56,8 +69,10 @@ class ContentPage extends React.Component {
             property="og:image"
             content={`https://thedrab.co/external/ogimage/${container.contentId}/`}
           />
-          <meta property="og:title" content={content.headline} />
+          <meta property="og:title" content={content.shortHeadline} />
           <meta property="og:description" content={content.standfirst} />
+          <meta property="description" content={content.standfirst} />
+          <meta property="author" content={authorsString.join('')} />
         </Helmet>
         <div className="ContentPage Container">
           <article>
@@ -126,6 +141,7 @@ const ContentPageData = gql`
         publishedDate
         content {
           headline
+          shortHeadline
           kicker
           standfirst
           tone

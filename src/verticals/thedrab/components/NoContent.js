@@ -6,7 +6,7 @@ function NoContent() {
     <div className="NoContent">
       <div className="Container">
         {
-          "Somehow no one 'written' some stuff that would usually go here."
+          "We can't find anything to go here. Obviously this has never happened before."
         }
       </div>
     </div>

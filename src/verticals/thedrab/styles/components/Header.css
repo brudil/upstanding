@@ -6,12 +6,18 @@
 
   &__container {
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+
+    @media (--small) {
+      align-items: flex-end;
+      flex-direction: row;
+    }
   }
 
   &__logo {
     display: block;
     width: 140px;
+    text-decoration: none;
   }
 
   &__logo-container {
@@ -55,5 +61,19 @@
     display: block;
     margin-top: -0.3rem;
     margin-left: -0.3rem;
+
+    &--desktop {
+      display: none;
+
+      @media (--small) {
+        display: block;
+      }
+    }
+
+    @media (--small) {
+      &--mobile {
+        display: none;
+      }
+    }
   }
 }

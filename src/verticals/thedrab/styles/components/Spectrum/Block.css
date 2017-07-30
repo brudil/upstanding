@@ -1,6 +1,9 @@
 .Block {
   &--standard {
     max-width: 560px;
-    padding-left: 80px;
+
+    @media (--medium) {
+      padding-left: 3rem;
+    }
   }
 }

@@ -27,6 +27,9 @@ function RootContainer() {
       >
         <script src="https://use.typekit.net/cob0eos.js" />
         <script>{`try{Typekit.load({ async: true });}catch(e){}`}</script>
+        <meta property="og:site_name" content="The Drab" />
+        <meta property="fb:app_id" content="696155863910264" />
+        <meta property="fb:pages" content="1302392339858247" />
       </Helmet>
       <Header />
       <div className="Site__main">
