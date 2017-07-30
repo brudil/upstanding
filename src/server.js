@@ -23,6 +23,8 @@ import forceSsl from './server/force-ssl';
 
 require('isomorphic-fetch');
 
+const LOWDOWN_HOST = process.env.LOWDOWN_HOST || 'http://localhost:8000';
+
 function renderFullPage(vertical, component, store) {
   return `
       <!doctype html>
@@ -90,7 +92,6 @@ export default function server({ verticals, port }) {
     console.log('Vertical: ', vertical.name);
     console.log('Serving: ', req.url);
 
-    const LOWDOWN_HOST = process.env.LOWDOWN_HOST || 'http://localhost:8000';
     const networkInterface = createNetworkInterface({
       uri: `${LOWDOWN_HOST}/graphql/`,
     });
@@ -177,8 +178,13 @@ export default function server({ verticals, port }) {
   }
 
   app.use('/dist', express.static(`${__dirname}/../dist`));
-  app.use('/external', (req, res) => {
-    // handle asking vertical to generate ogimage.
+  app.use('/external/ogimage/:contentId', (req, res) => {
+    const vertical = getVertical(req.hostname, verticals);
+    const networkInterface = createNetworkInterface({
+      uri: `${LOWDOWN_HOST}/graphql/`,
+    });
+
+    vertical.external(networkInterface, req, res);
   });
   app.use('/interactive-frame/:slug/v:rid', (req, res) => {
     const interactiveSlug = req.params.slug;
