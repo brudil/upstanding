@@ -56,6 +56,7 @@ class ContentPage extends React.Component {
             property="og:image"
             content={`https://thedrab.co/external/ogimage/${container.contentId}/`}
           />
+          <meta property="og:title" content={content.headline} />
           <meta property="og:description" content={content.standfirst} />
         </Helmet>
         <div className="ContentPage Container">
