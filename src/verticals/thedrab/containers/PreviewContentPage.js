@@ -26,7 +26,7 @@ class PreviewContentPage extends React.Component {
       };
     }
 
-    if (content.authors === null || content.authors.length >= 0) {
+    if (content.authors === null || content.authors.length <= 0) {
       content.authors = [
         {
           name: 'Mr ADD A AUTHOR',
