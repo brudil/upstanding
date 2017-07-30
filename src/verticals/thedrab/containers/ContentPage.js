@@ -75,12 +75,24 @@ class ContentPage extends React.Component {
                 />
               </div>
             </div>
-            <FluidImage
-              src={posterImageUrl}
-              role="presentation"
-              ratio={imageHeight / imageWidth}
-            />
-
+            <figure className="Content__posterImage">
+              <FluidImage
+                src={posterImageUrl}
+                role="presentation"
+                ratio={imageHeight / imageWidth}
+              />
+              <figcaption>
+                <span className="Content__posterImage-credit">
+                  {content.posterImage.creditUrl
+                    ? <a href={content.posterImage.creditUrl}>
+                        {content.posterImage.creditTitle || 'Credit'}
+                      </a>
+                    : <span>
+                        {content.posterImage.creditTitle}
+                      </span>}
+                </span>
+              </figcaption>
+            </figure>
             <div className="Content__body">
               <Document
                 document={content.document}
