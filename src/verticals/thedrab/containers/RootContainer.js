@@ -8,6 +8,7 @@ import brandingLinks from './head/brandingLinks';
 import brandingMeta from './head/brandingMeta';
 import HomePage from './HomePage';
 import ContentPage from './ContentPage';
+import PreviewContentPage from './PreviewContentPage';
 import FormFrontPage from './FormFrontPage';
 import ToneFrontPage from './ToneFrontPage';
 import SectionFrontPage from './SectionFrontPage';
@@ -38,6 +39,11 @@ function RootContainer() {
           <Route path="/form/:form" component={FormFrontPage} />
           <Route path="/tone/:tone" component={ToneFrontPage} />
           <Route path="/author/:author" component={AuthorFrontPage} />
+          <Route
+            path="/preview/:revisionId/:previewKey"
+            component={PreviewContentPage}
+            exact
+          />
           <Route path="/:form/**-:contentId" component={ContentPage} exact />
           <Route path="/:section" component={SectionFrontPage} />
           <Route component={NotFoundPage} />
