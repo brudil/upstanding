@@ -7,6 +7,7 @@ import dnsPrefetchLinks from './head/dnsPrefetchLinks';
 import brandingLinks from './head/brandingLinks';
 import brandingMeta from './head/brandingMeta';
 import HomePage from './HomePage';
+import DisclaimerPage from './DisclaimerPage';
 import ContentPage from './ContentPage';
 import PreviewContentPage from './PreviewContentPage';
 import FormFrontPage from './FormFrontPage';
@@ -36,6 +37,7 @@ function RootContainer() {
       <div className="Site__main">
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/disclaimer" component={DisclaimerPage} />
           <Route path="/form/:form" component={FormFrontPage} />
           <Route path="/tone/:tone" component={ToneFrontPage} />
           <Route path="/author/:author" component={AuthorFrontPage} />

@@ -17,4 +17,8 @@
   &__tag {
     font-size: 0.9rem;
   }
+
+  &__disclaimer {
+    margin-left: 1rem;
+  }
 }
