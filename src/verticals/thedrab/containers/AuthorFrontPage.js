@@ -28,7 +28,7 @@ class HomePage extends React.Component {
           <meta property="og:image" content="" />
           <meta property="og:description" content={'The Drab'} />
         </Helmet>
-        <FrontsHeader title={`All our content by ${vertical.author.name}`} />
+        <FrontsHeader title={vertical.author.name} kicker="Author" />
 
         {nodes.length > 0
           ? <FrontContainer title="Latest" content={nodes} />

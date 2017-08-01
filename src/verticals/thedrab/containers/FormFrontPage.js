@@ -22,8 +22,9 @@ class HomePage extends React.Component {
           <meta property="og:description" content={'The Drab'} />
         </Helmet>
         <FrontsHeader
-          title={`All our content with the form of: ${this.props.match.params
-            .form}`}
+          title={this.props.match.params
+            .form}
+          kicker="Form"
         />
         {nodes.length > 0
           ? <FrontContainer title="Latest" content={nodes} />

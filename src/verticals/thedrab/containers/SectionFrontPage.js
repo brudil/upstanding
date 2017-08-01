@@ -28,7 +28,7 @@ class HomePage extends React.Component {
           <meta property="og:image" content="" />
           <meta property="og:description" content={'The Drab'} />
         </Helmet>
-        <FrontsHeader title={`${this.props.match.params.section}`} />
+        <FrontsHeader title={this.props.match.params.section} kicker="Section" />
 
         {nodes.length > 0
           ? <FrontContainer title="Latest" content={nodes} />

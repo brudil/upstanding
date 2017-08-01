@@ -13,8 +13,8 @@ import {
   createNetworkInterface,
 } from 'react-apollo';
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
-import { BrowserRouter as Router } from 'react-router-dom';
-import ReactGA from 'react-ga';
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import Raven from 'raven-js';
 import ScrollToTop from '../components/ScrollToTop';
 
@@ -37,20 +37,38 @@ function client({ name, slug, Application, tracking }) {
   if (process.env.NODE_ENV === 'production') {
     /* set up getsentry.com error reporting and tracking */
     Raven.config(tracking.sentry).install();
-
-    /* initialize Google Analytics via ReactGA (hooks in to React Router */
-    ReactGA.initialize(tracking.ga);
   }
 
-  function logPageView() {
-    // eslint-disable-next-line no-undef
-    if (process.env.NODE_ENV === 'production') {
-      ReactGA.set({ page: window.location.pathname });
-      ReactGA.pageview(window.location.pathname);
-    } else {
-      console.log('ga', { page: window.location.pathname });
-    }
-  }
+  const initGA =
+    process.env.NODE_ENV === 'production'
+      ? history => {
+          (function(i, s, o, g, r, a, m) {
+            i.GoogleAnalyticsObject = r;
+            (i[r] =
+              i[r] ||
+              function() {
+                (i[r].q = i[r].q || []).push(arguments);
+              }), (i[r].l = 1 * new Date());
+            (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+          })(
+            window,
+            document,
+            'script',
+            'https://www.google-analytics.com/analytics.js',
+            'ga'
+          );
+
+          ga('create', tracking.ga, 'auto');
+          ga('send', 'pageview');
+
+          history.listen(location => {
+            ga('send', 'pageview', location.pathname);
+          });
+        }
+      : () => null;
 
   const middleware = [];
 
@@ -77,9 +95,13 @@ function client({ name, slug, Application, tracking }) {
     window.__data
   );
 
+  const history = createBrowserHistory();
+
+  initGA(history);
+
   ReactDOM.render(
     <ApolloProvider store={store} client={aClient}>
-      <Router>
+      <Router history={history}>
         <ScrollToTop>
           <Application />
         </ScrollToTop>

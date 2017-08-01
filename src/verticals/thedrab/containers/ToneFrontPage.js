@@ -17,7 +17,6 @@ class HomePage extends React.Component {
 
     if (error) {
       return <ErrorPage status={404} />
-
     }
 
     const nodes = vertical.allContent.edges.map(edge => edge.node);
@@ -28,7 +27,7 @@ class HomePage extends React.Component {
           <meta property="og:image" content="" />
           <meta property="og:description" content={'The Drab'} />
         </Helmet>
-        <FrontsHeader title={`All our content with the tone of: ${this.props.match.params.tone}`} />
+        <FrontsHeader title={this.props.match.params.tone} kicker="Tone" />
 
         {nodes.length > 0
           ? <FrontContainer title="Latest" content={nodes} />
