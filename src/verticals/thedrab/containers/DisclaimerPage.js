@@ -22,12 +22,16 @@ function DisclaimerPage() {
           outside the world of celebrity, politics and news are purely
           coincidental.
         </p>
+    <p>
+    All photographs used in articles are either in the public domain, 
+    or are covered by licenses which can be accessed via the credit links under the respective image.
+    </p>
         <p>
           The opinions expressed on The Drab and it’s associated media do not
           necessarily reflect the views and opinions of The Drab’s founders,
-          writers and contributors.
+          writers or contributors.
         </p>
-        <p>The Drab may include mature content.</p>
+        <p>The Drab may include mature content or content which may be considered offensive.</p>
       </div>
     </div>
   );
