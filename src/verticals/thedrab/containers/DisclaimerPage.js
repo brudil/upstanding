@@ -23,7 +23,7 @@ function DisclaimerPage() {
           coincidental.
         </p>
     <p>
-    All photographs used in articles are either in the public domain, 
+    All photographs used in articles either do not require attribution, 
     or are covered by licenses which can be accessed via the credit links under the respective image.
     </p>
         <p>
