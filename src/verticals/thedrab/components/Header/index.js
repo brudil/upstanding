@@ -37,10 +37,10 @@ function Header() {
         <div className="Header__logo-container">
           <Link to="/" className="Header__logo">
             <Logo />
-            <span className="Header__tagline Header__tagline--mobile">
-              {sample(taglines)}
-            </span>
           </Link>
+          <span className="Header__tagline Header__tagline--mobile">
+            {sample(taglines)}
+          </span>
         </div>
         <Nav />
       </div>
