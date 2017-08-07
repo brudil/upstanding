@@ -34,6 +34,16 @@ class ContentPage extends React.Component {
 
     const contentPath = preview ? '' : getPathForContent(container);
 
+    const subtype = content.document.content._name;
+
+    const hidePosterImage =
+      subtype === 'canvas_subtype' &&
+      ['CANVAS', 'CONTAINER'].indexOf(content.document.content.viewMode) !== -1;
+
+    const hideMetadata =
+      subtype === 'canvas_subtype' &&
+      ['CANVAS'].indexOf(content.document.content.viewMode) !== -1;
+
     return (
       <div className="Main">
         <Helmet title={content.shortHeadline} encodeSpecialCharacters={false}>
@@ -53,39 +63,43 @@ class ContentPage extends React.Component {
         </Helmet>
         <div className="ContentPage Container">
           <article>
-            <div className="Content__meta">
-              <div className="Content__kicker">
-                {content.kicker}
-              </div>
-              <h1 className="Content__title">
-                {content.headline}
-              </h1>
-              <div className="Content__meta">
-                <Byline
-                  className="ContentHeader__byline"
-                  authors={content.authors}
-                  publishedDate={container.publishedDate}
-                />
-              </div>
-            </div>
-            <figure className="Content__posterImage">
-              <FluidImage
-                src={posterImageUrl}
-                role="presentation"
-                ratio={imageHeight / imageWidth}
-              />
-              <figcaption>
-                <span className="Content__posterImage-credit">
-                  {content.posterImage.creditUrl
-                    ? <a href={content.posterImage.creditUrl}>
-                        {content.posterImage.creditTitle || 'Credit'}
-                      </a>
-                    : <span>
-                        {content.posterImage.creditTitle}
-                      </span>}
-                </span>
-              </figcaption>
-            </figure>
+            {hideMetadata
+              ? null
+              : <div className="Content__meta">
+                  <div className="Content__kicker">
+                    {content.kicker}
+                  </div>
+                  <h1 className="Content__title">
+                    {content.headline}
+                  </h1>
+                  <div className="Content__meta">
+                    <Byline
+                      className="ContentHeader__byline"
+                      authors={content.authors}
+                      publishedDate={container.publishedDate}
+                    />
+                  </div>
+                </div>}
+            {hidePosterImage
+              ? null
+              : <figure className="Content__posterImage">
+                  <FluidImage
+                    src={posterImageUrl}
+                    role="presentation"
+                    ratio={imageHeight / imageWidth}
+                  />
+                  <figcaption>
+                    <span className="Content__posterImage-credit">
+                      {content.posterImage.creditUrl
+                        ? <a href={content.posterImage.creditUrl}>
+                            {content.posterImage.creditTitle || 'Credit'}
+                          </a>
+                        : <span>
+                            {content.posterImage.creditTitle}
+                          </span>}
+                    </span>
+                  </figcaption>
+                </figure>}
             <div className="Content__body">
               <Document
                 document={content.document}
