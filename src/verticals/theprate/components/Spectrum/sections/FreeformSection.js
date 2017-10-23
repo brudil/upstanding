@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ElementStream from '../ElementStream';
 
@@ -12,7 +13,7 @@ function FreeformSection(props) {
 }
 
 FreeformSection.propTypes = {
-  data: React.PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 export default FreeformSection;

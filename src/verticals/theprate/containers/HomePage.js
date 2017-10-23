@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -25,9 +26,9 @@ class HomePage extends React.Component {
 }
 
 HomePage.propTypes = {
-  setFront: React.PropTypes.func.isRequired,
-  data: React.PropTypes.array.isRequired,
-  isLoading: React.PropTypes.bool.isRequired,
+  setFront: PropTypes.func.isRequired,
+  data: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {

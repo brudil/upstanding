@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { Link } from 'react-router-dom';
@@ -35,12 +36,7 @@ function CadeHeroContent(props) {
     >
       <Link
         to={`/${forms[content.form]}/${content.slug}-${container.contentId}`}
-      >const forms = {
-        ARTICLE: 'article',
-        VIDEO: 'video',
-        INTERACTIVE: 'interactive',
-        GALLERY: 'gallery',
-      };
+      >
         <div className="CadeHeroContent__poster-container">
           <FluidImage
             className="CadeHeroContent__poster"
@@ -61,9 +57,9 @@ function CadeHeroContent(props) {
 }
 
 CadeHeroContent.propTypes = {
-  content: React.PropTypes.object.isRequired,
-  main: React.PropTypes.bool,
-  secondary: React.PropTypes.bool,
+  content: PropTypes.object.isRequired,
+  main: PropTypes.bool,
+  secondary: PropTypes.bool,
 };
 
 export default CadeHeroContent;

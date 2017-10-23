@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import CadeHero from './Cade/Hero';
 import CadeGrid from './Cade/Grid';
@@ -15,8 +16,8 @@ function FrontContainer(props) {
 }
 
 FrontContainer.propTypes = {
-  content: React.PropTypes.array.isRequired,
-  title: React.PropTypes.string.isRequired,
+  content: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default FrontContainer;

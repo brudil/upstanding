@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import FrontGridContent from './FrontGridContent';
 
@@ -16,7 +17,7 @@ function FrontGrid(props) {
 }
 
 FrontGrid.propTypes = {
-  content: React.PropTypes.array.isRequired,
+  content: PropTypes.array.isRequired,
 };
 
 export default FrontGrid;

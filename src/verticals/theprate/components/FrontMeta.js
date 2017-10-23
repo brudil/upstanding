@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import TimeAgo from 'react-timeago';
 
@@ -16,8 +17,8 @@ function FrontMeta({ className, content }) {
 }
 
 FrontMeta.propTypes = {
-  className: React.PropTypes.string,
-  content: React.PropTypes.object.isRequired,
+  className: PropTypes.string,
+  content: PropTypes.object.isRequired,
 };
 
 export default FrontMeta;

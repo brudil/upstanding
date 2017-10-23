@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import omit from 'lodash/omit';
 
@@ -17,8 +18,8 @@ function FluidImage(props) {
 }
 
 FluidImage.propTypes = {
-  alt: React.PropTypes.string,
-  ratio: React.PropTypes.number.isRequired,
+  alt: PropTypes.string,
+  ratio: PropTypes.number.isRequired,
 };
 
 export default FluidImage;

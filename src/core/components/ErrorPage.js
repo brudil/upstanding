@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 function ErrorPage(props) {
@@ -22,8 +23,8 @@ function ErrorPage(props) {
 }
 
 ErrorPage.propTypes = {
-  statusCode: React.PropTypes.number.isRequired,
-  textMap: React.PropTypes.object.isRequired,
+  statusCode: PropTypes.number.isRequired,
+  textMap: PropTypes.object.isRequired,
 };
 
 ErrorPage.defaultProps = {

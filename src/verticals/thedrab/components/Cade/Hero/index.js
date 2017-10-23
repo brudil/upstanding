@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import CadeSection from '../CadeSection';
 import CadeHeroContent from './CadeHeroContent';
@@ -13,7 +14,7 @@ function CadeHero(props) {
 }
 
 CadeHero.propTypes = {
-  content: React.PropTypes.array.isRequired,
+  content: PropTypes.array.isRequired,
 };
 
 export default CadeHero;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 function Headline(props) {
@@ -10,7 +11,7 @@ function Headline(props) {
 }
 
 Headline.propTypes = {
-  headline: React.PropTypes.string.isRequired,
+  headline: PropTypes.string.isRequired,
 };
 
 export default Headline;

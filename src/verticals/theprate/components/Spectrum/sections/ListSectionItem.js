@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import HeadingBlock from '../blocks/HeadingBlock';
 import ElementStream from '../ElementStream';
@@ -13,7 +14,7 @@ function ListSectionItem(props) {
 }
 
 ListSectionItem.propTypes = {
-  data: React.PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 export default ListSectionItem;

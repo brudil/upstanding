@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { Link } from 'react-router-dom';
@@ -45,8 +46,8 @@ function FrontGridContent(props) {
 }
 
 FrontGridContent.propTypes = {
-  className: React.PropTypes.string,
-  content: React.PropTypes.object.isRequired,
+  className: PropTypes.string,
+  content: PropTypes.object.isRequired,
 };
 
 export default FrontGridContent;

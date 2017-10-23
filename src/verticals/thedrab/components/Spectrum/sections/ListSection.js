@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { elementStream } from '../ElementStream';
 
@@ -13,7 +14,7 @@ function ListSection({ data, resources }) {
 }
 
 ListSection.propTypes = {
-  data: React.PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 export default ListSection;

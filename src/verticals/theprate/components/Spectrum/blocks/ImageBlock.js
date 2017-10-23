@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { imgixURL } from '../../../../../core/components/utils';
@@ -20,8 +21,8 @@ function ImageBlock(props) {
 }
 
 ImageBlock.propTypes = {
-  image: React.PropTypes.object.isRequired,
-  data: React.PropTypes.object.isRequired,
+  image: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 export default connect((state, ownProps) => ({

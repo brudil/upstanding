@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ArticleSubtype from '../subtypes/ArticleSubtype';
 import CanvasSubtype from '../subtypes/CanvasSubtype';
@@ -16,7 +17,7 @@ function SpectrumDocument({ document, resources }) {
 }
 
 SpectrumDocument.propTypes = {
-  document: React.PropTypes.object.isRequired,
+  document: PropTypes.object.isRequired,
 };
 
 export default SpectrumDocument;

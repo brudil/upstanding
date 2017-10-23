@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Helmet from 'react-helmet';
 import Header from '../components/Header';
@@ -34,7 +35,7 @@ function RootContainer(props) {
 }
 
 RootContainer.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 export default RootContainer;

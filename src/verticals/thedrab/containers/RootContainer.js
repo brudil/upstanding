@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Helmet from 'react-helmet';
 import { Route, Switch } from 'react-router-dom';
@@ -54,7 +55,7 @@ function RootContainer() {
 }
 
 RootContainer.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 export default RootContainer;

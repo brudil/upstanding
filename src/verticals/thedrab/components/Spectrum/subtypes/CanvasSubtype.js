@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import CanvasBlock from '../blocks/CanvasBlock';
 
@@ -6,7 +7,7 @@ function ArticleSubtype(props) {
 }
 
 ArticleSubtype.propTypes = {
-  data: React.PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 export default ArticleSubtype;

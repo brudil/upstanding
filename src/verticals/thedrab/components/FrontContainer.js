@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import FrontsContent from './FrontsContent';
 import { gql } from 'react-apollo';
@@ -19,7 +20,7 @@ function FrontContainer(props) {
       <div className="Container">
         <div className="FrontsContainer__grid">
           {gridContent.map(contentItem =>
-            <FrontsContent grid content={contentItem} />
+            <FrontsContent grid content={contentItem} key={contentItem.contentId} />
           )}
         </div>
       </div>
@@ -28,8 +29,8 @@ function FrontContainer(props) {
 }
 
 FrontContainer.propTypes = {
-  content: React.PropTypes.array.isRequired,
-  title: React.PropTypes.string.isRequired,
+  content: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 FrontContainer.fragments = {

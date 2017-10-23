@@ -89,7 +89,5 @@ module.exports = {
         loader: 'file-loader',
       },
     ],
-
-    noParse: /\.min\.js/,
   },
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
 import formatDistance from 'date-fns/formatDistance';
-import PropTypes from 'prop-types';
 import Image from '../Image';
 import { Link } from 'react-router-dom';
 import getPathForContent from '../../utils/getPathForContent';
@@ -17,11 +16,7 @@ function ComputedKicker({ content }) {
 
   // if form/tone = quiz, "Quiz"
 
-  return (
-    <span>
-      {content.kicker}
-    </span>
-  );
+  return <span>{content.kicker}</span>;
 }
 
 function FrontsContent({
@@ -64,19 +59,20 @@ function FrontsContent({
           >
             {content.headline}
           </Link>
-          {content.tone === 'VIEWPOINT'
-            ? <span className="FrontsContent__author-inline">
-                {' '}by{' '}
-                {content.authors.map((author, index) =>
+          {content.tone === 'VIEWPOINT' ? (
+            <span className="FrontsContent__author-inline">
+              {' '}
+              by{' '}
+              {content.authors.map((author, index) => (
+                <span key={author.id}>
+                  {author.name}
                   <span>
-                    {author.name}
-                    <span>
-                      {index < content.authors.length - 1 ? ' and ' : ''}
-                    </span>
+                    {index < content.authors.length - 1 ? ' and ' : ''}
                   </span>
-                )}
-              </span>
-            : null}
+                </span>
+              ))}
+            </span>
+          ) : null}
         </h1>
       </div>
       <Link

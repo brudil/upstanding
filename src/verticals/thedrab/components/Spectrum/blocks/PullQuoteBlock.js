@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 function PullQuoteBlock(props) {
@@ -11,7 +12,7 @@ function PullQuoteBlock(props) {
 }
 
 PullQuoteBlock.propTypes = {
-  data: React.PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 export default PullQuoteBlock;

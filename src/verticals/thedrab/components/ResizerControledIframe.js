@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import omit from 'lodash/omit';
 import iframeResizer from 'iframe-resizer/js/iframeResizer';
@@ -26,10 +27,10 @@ class ResizerManagedIframe extends React.Component {
 }
 
 ResizerManagedIframe.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  children: React.PropTypes.node,
-  src: React.PropTypes.string,
-  options: React.PropTypes.object,
+  id: PropTypes.string.isRequired,
+  children: PropTypes.node,
+  src: PropTypes.string,
+  options: PropTypes.object,
 };
 
 ResizerManagedIframe.defaultProps = {

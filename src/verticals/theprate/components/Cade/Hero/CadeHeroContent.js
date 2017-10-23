@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { Link } from 'react-router-dom';
@@ -54,9 +55,9 @@ function CadeHeroContent(props) {
 }
 
 CadeHeroContent.propTypes = {
-  content: React.PropTypes.object.isRequired,
-  main: React.PropTypes.bool,
-  secondary: React.PropTypes.bool,
+  content: PropTypes.object.isRequired,
+  main: PropTypes.bool,
+  secondary: PropTypes.bool,
 };
 
 export default CadeHeroContent;

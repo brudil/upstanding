@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -88,11 +89,11 @@ class ContentPage extends React.Component {
 }
 
 ContentPage.propTypes = {
-  setContent: React.PropTypes.func.isRequired,
-  isLoading: React.PropTypes.bool.isRequired,
-  content: React.PropTypes.object.isRequired,
-  routeParams: React.PropTypes.object.isRequired,
-  didFailToLoad: React.PropTypes.number.isRequired,
+  setContent: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  content: PropTypes.object.isRequired,
+  routeParams: PropTypes.object.isRequired,
+  didFailToLoad: PropTypes.number.isRequired,
 };
 
 function mapDispatchToProps(dispatch) {

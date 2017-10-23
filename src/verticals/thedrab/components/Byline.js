@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import formatDistance from 'date-fns/formatDistance';
@@ -27,8 +28,8 @@ function Byline(props) {
 }
 
 Byline.propTypes = {
-  authors: React.PropTypes.array.isRequired,
-  className: React.PropTypes.string,
+  authors: PropTypes.array.isRequired,
+  className: PropTypes.string,
 };
 
 export default Byline;

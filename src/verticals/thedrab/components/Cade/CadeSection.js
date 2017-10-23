@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 function CadeSection(props) {
@@ -14,8 +15,8 @@ function CadeSection(props) {
 }
 
 CadeSection.propTypes = {
-  title: React.PropTypes.string,
-  children: React.PropTypes.node.isRequired,
+  title: PropTypes.string,
+  children: PropTypes.node.isRequired,
 };
 
 export default CadeSection;

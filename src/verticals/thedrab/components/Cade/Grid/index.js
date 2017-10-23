@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import CadeSection from '../CadeSection';
 import CadeGridContentCard from './CadeGridContentCard';
@@ -17,7 +18,7 @@ function CadeGrid(props) {
 }
 
 CadeGrid.propTypes = {
-  content: React.PropTypes.array.isRequired,
+  content: PropTypes.array.isRequired,
 };
 
 export default CadeGrid;

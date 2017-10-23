@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ResizerControledIframe from '../../ResizerControledIframe';
 
@@ -14,8 +15,8 @@ function CanvasBlock({ data, resources }) {
 }
 
 CanvasBlock.propTypes = {
-  image: React.PropTypes.object.isRequired,
-  data: React.PropTypes.object.isRequired,
+  image: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 export default CanvasBlock;

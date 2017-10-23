@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import FrontHeroContent from './FrontHeroContent';
 
@@ -22,7 +23,7 @@ function FrontHeroTri(props) {
 }
 
 FrontHeroTri.propTypes = {
-  content: React.PropTypes.array.isRequired,
+  content: PropTypes.array.isRequired,
 };
 
 export default FrontHeroTri;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ArticleSubtype from '../subtypes/ArticleSubtype';
 
@@ -12,7 +13,7 @@ function SpectrumDocument(props) {
 }
 
 SpectrumDocument.propTypes = {
-  document: React.PropTypes.object.isRequired,
+  document: PropTypes.object.isRequired,
 };
 
 export default SpectrumDocument;

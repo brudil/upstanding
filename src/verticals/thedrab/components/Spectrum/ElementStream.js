@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { getElementFromData } from './utils';
 
@@ -14,8 +15,8 @@ function ElementStream({ stream, resources }) {
 }
 
 ElementStream.propTypes = {
-  stream: React.PropTypes.array.isRequired,
-  resources: React.PropTypes.object.isRequired,
+  stream: PropTypes.array.isRequired,
+  resources: PropTypes.object.isRequired,
 };
 
 export default ElementStream;
