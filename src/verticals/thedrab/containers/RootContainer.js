@@ -25,12 +25,13 @@ function RootContainer() {
         titleTemplate="%s | The Drab"
         defaultTitle="The Drab"
         script={[]}
-        link={[...brandingLinks, ...dnsPrefetchLinks]}
+        link={[
+          { rel: 'stylesheet', href: 'https://use.typekit.net/cob0eos.css' },
+          ...brandingLinks,
+          ...dnsPrefetchLinks,
+        ]}
         meta={[...brandingMeta]}
-      >
-        <script src="https://use.typekit.net/cob0eos.js" />
-        <script>{`try{Typekit.load({ async: true });}catch(e){}`}</script>
-      </Helmet>
+      />
       <Header />
       <div className="Site__main">
         <Switch>
