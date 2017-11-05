@@ -5,5 +5,9 @@
     @media (--medium) {
       padding-left: 3rem;
     }
+
+    @media (--extra-large) {
+      padding-left: 5rem;
+    }
   }
 }

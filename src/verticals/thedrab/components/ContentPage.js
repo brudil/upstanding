@@ -8,8 +8,22 @@ import Byline from '../components/Byline';
 import FluidImage from '../components/FluidImage';
 import { imgixURL } from '../../../core/components/utils';
 import getPathForContent from '../utils/getPathForContent';
+import RelatedContent from './RelatedContent';
+import social, { openSocial } from '../../../core/utils/social';
 
 class ContentPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleOpenSocial = this.handleOpenSocial.bind(this);
+  }
+
+  handleOpenSocial(e) {
+    e.preventDefault();
+
+    openSocial(e.currentTarget.href);
+  }
+
   render() {
     const { content, container, preview = false } = this.props;
     const imageHeight = 400;
@@ -55,50 +69,48 @@ class ContentPage extends React.Component {
             property="og:image"
             content={`https://thedrab.co/external/ogimage/${container.contentId}/`}
           />
+          <meta property="og:image:width" content="630" />
+          <meta property="og:image:height" content="1200" />
           <meta property="og:title" content={content.shortHeadline} />
           <meta property="og:description" content={content.standfirst} />
           <meta property="description" content={content.standfirst} />
           <meta property="author" content={authorsString.join('')} />
         </Helmet>
         <div className="ContentPage Container">
-          <article>
-            {hideMetadata
-              ? null
-              : <div className="Content__meta">
-                  <div className="Content__kicker">
-                    {content.kicker}
-                  </div>
-                  <h1 className="Content__title">
-                    {content.headline}
-                  </h1>
-                  <div className="Content__meta">
-                    <Byline
-                      className="ContentHeader__byline"
-                      authors={content.authors}
-                      publishedDate={container.publishedDate}
-                    />
-                  </div>
-                </div>}
-            {hidePosterImage
-              ? null
-              : <figure className="Content__posterImage">
-                  <FluidImage
-                    src={posterImageUrl}
-                    role="presentation"
-                    ratio={imageHeight / imageWidth}
+          <article className="ContentPage__article">
+            {hideMetadata ? null : (
+              <div className="Content__meta">
+                <div className="Content__kicker">{content.kicker}</div>
+                <h1 className="Content__title">{content.headline}</h1>
+                <div className="Content__meta">
+                  <Byline
+                    className="ContentHeader__byline"
+                    authors={content.authors}
+                    publishedDate={container.publishedDate}
                   />
-                  <figcaption>
-                    <span className="Content__posterImage-credit">
-                      {content.posterImage.creditUrl
-                        ? <a href={content.posterImage.creditUrl}>
-                            {content.posterImage.creditTitle || 'Credit'}
-                          </a>
-                        : <span>
-                            {content.posterImage.creditTitle}
-                          </span>}
-                    </span>
-                  </figcaption>
-                </figure>}
+                </div>
+              </div>
+            )}
+            {hidePosterImage ? null : (
+              <figure className="Content__posterImage">
+                <FluidImage
+                  src={posterImageUrl}
+                  role="presentation"
+                  ratio={imageHeight / imageWidth}
+                />
+                <figcaption>
+                  <span className="Content__posterImage-credit">
+                    {content.posterImage.creditUrl ? (
+                      <a href={content.posterImage.creditUrl}>
+                        {content.posterImage.creditTitle || 'Credit'}
+                      </a>
+                    ) : (
+                      <span>{content.posterImage.creditTitle}</span>
+                    )}
+                  </span>
+                </figcaption>
+              </figure>
+            )}
             <div className="Content__body">
               <Document
                 document={content.document}
@@ -111,6 +123,29 @@ class ContentPage extends React.Component {
               />
             </div>
           </article>
+          <div className="ContentPage__social">
+            <div className="ContentPage__social-inner">
+              <p>Feed your content hungry friends</p>
+              <a
+                className="ContentPage__social-button ContentPage__social-button--twitter"
+                onClick={this.handleOpenSocial}
+                href={social.twitter(
+                  content.headline,
+                  `https://thedrab.co${contentPath}`
+                )}
+              >
+                Tweet
+              </a>
+              <a
+                className="ContentPage__social-button ContentPage__social-button--facebook"
+                onClick={this.handleOpenSocial}
+                href={social.facebook(`https://thedrab.co${contentPath}`)}
+              >
+                Share
+              </a>
+            </div>
+          </div>
+          <RelatedContent contentId={container.contentId} />
         </div>
       </div>
     );

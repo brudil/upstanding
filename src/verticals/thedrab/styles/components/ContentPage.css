@@ -3,11 +3,47 @@
   overflow: hidden;
   padding-top: 0.5rem;
 
+  &__article {
+    margin-bottom: 2rem;
+  }
+
   &__primary {
     padding-top: 1.5rem;
     box-sizing: border-box;
   }
 
   &__sidebar {
+  }
+
+  &__social {
+
+    &:before {
+      width: 100%;
+      max-width: 660px;
+      content: '';
+      display: block;
+      border-bottom: 1px solid var(--color__third);
+    }
+  }
+
+  &__social-inner {
+    padding: 1rem;
+  }
+
+  &__social-button {
+    display: inline-block;
+    padding: 0.3rem 0.5rem;
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+
+    &--twitter {
+      background: #1da1f2;
+    }
+
+    &--facebook {
+      background: #3b5998;
+    }
   }
 }
