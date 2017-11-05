@@ -7,6 +7,12 @@ function PullQuoteBlock(props) {
   return (
     <div className="Block Block--standard PullQuoteBlock">
       {data.quote.text}
+
+      {data.attribution.text ? (
+        <div className="PullQuoteBlock__attribution">
+          {data.attribution.text}
+        </div>
+      ) : null}
     </div>
   );
 }
