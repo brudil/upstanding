@@ -13,7 +13,7 @@ export default {
     }
     const url = `https://www.facebook.com/v2.8/dialog/share?href=${encodeURIComponent(
       link
-    )}&app_id=696155863910264&display=page`;
+    )}&app_id=696155863910264`;
     return url;
   },
   twitter(text, link) {
