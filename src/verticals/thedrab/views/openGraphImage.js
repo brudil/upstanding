@@ -1,6 +1,4 @@
-import { InMemoryCache } from 'apollo-client-preset';
-import { ApolloClient } from 'react-apollo';
-import { graphql } from 'react-apollo';
+import { ApolloClient, InMemoryCache } from 'apollo-client-preset';
 import gql from 'graphql-tag';
 
 import { imgixText, imgixURL } from '../../../core/components/utils';
@@ -48,10 +46,10 @@ export default function generateOpenGraphImage(link, req, res) {
         txtfont64: new Buffer('Helvetica Neue Condensed, Bold').toString(
           'base64'
         ),
-        txt64: new Buffer(content.headline)
+        txt64: new Buffer(`${content.headline}`)
           .toString('base64')
           .replace(/=/g, ''),
-        txtpad: 70,
+        txtpad: 60,
         bg: 'aa6D4D2D',
         txtclr: 'fff',
         txtsize: 80,
@@ -64,7 +62,7 @@ export default function generateOpenGraphImage(link, req, res) {
         mark: 'https://drafty.imgix.net/50d2c118-344a-40be-9d13-47d7b2840292',
         h: 630,
         w: 1200,
-        markpad: 30,
+        markpad: 60,
         blend64: new Buffer(textBlend).toString('base64'),
       });
 
