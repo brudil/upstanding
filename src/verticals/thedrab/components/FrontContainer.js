@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import gql from 'graphql-tag';
 import FrontsContent from './FrontsContent';
-import { gql } from 'react-apollo';
 
 function FrontContainer(props) {
   const { content } = props;
@@ -12,16 +12,20 @@ function FrontContainer(props) {
       <div className="Container">
         <div className="FrontsContainer__hero">
           <FrontsContent hero content={heroContent[0]} />
-          {heroContent.length > 1
-            ? <FrontsContent hero square content={heroContent[1]} />
-            : null}
+          {heroContent.length > 1 ? (
+            <FrontsContent hero square content={heroContent[1]} />
+          ) : null}
         </div>
       </div>
       <div className="Container">
         <div className="FrontsContainer__grid">
-          {gridContent.map(contentItem =>
-            <FrontsContent grid content={contentItem} key={contentItem.contentId} />
-          )}
+          {gridContent.map(contentItem => (
+            <FrontsContent
+              grid
+              content={contentItem}
+              key={contentItem.contentId}
+            />
+          ))}
         </div>
       </div>
     </div>

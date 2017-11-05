@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import { Helmet } from 'react-helmet';
 import FrontContainer from '../components/FrontContainer';
 import LoadingIndicator from '../components/LoadingIndicator';
-import { gql, graphql } from 'react-apollo';
-import { Helmet } from 'react-helmet';
 import FrontsHeader from '../components/FrontsHeader';
 import ErrorPage from '../components/ErrorPage';
 import NoContent from '../components/NoContent';
+
 
 class HomePage extends React.Component {
   render() {
@@ -30,9 +32,11 @@ class HomePage extends React.Component {
         </Helmet>
         <FrontsHeader title={vertical.author.name} kicker="Author" />
 
-        {nodes.length > 0
-          ? <FrontContainer title="Latest" content={nodes} />
-          : <NoContent />}
+        {nodes.length > 0 ? (
+          <FrontContainer title="Latest" content={nodes} />
+        ) : (
+          <NoContent />
+        )}
       </div>
     );
   }

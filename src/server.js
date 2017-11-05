@@ -7,13 +7,11 @@ server application entry point
 import express from 'express';
 import React from 'react';
 import _ from 'lodash';
-import {
-  ApolloClient,
-  ApolloProvider,
-  getDataFromTree,
-  createNetworkInterface,
-} from 'react-apollo';
+import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-client-preset';
+import { ApolloProvider, getDataFromTree } from 'react-apollo';
+
 import { renderToString } from 'react-dom/server';
+import { Provider } from 'react-redux';
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
 import { StaticRouter } from 'react-router';
 import Raven from 'raven';
@@ -25,7 +23,7 @@ require('isomorphic-fetch');
 
 const LOWDOWN_HOST = process.env.LOWDOWN_HOST || 'http://localhost:8000';
 
-function renderFullPage(vertical, component, store) {
+function renderFullPage(vertical, component, store, client) {
   return `
       <!doctype html>
       ${renderToString(
@@ -34,12 +32,13 @@ function renderFullPage(vertical, component, store) {
           assets={global.webpack_isomorphic_tools.assets()}
           component={component}
           store={store}
+          client={client}
         />
       )}
     `;
 }
 
-function hydrateOnClient(vertical, store) {
+function hydrateOnClient(vertical, store, client) {
   return `
         <!doctype html>
         ${renderToString(
@@ -47,6 +46,7 @@ function hydrateOnClient(vertical, store) {
             vertical={vertical}
             assets={global.webpack_isomorphic_tools.assets()}
             store={store}
+            client={client}
           />
         )}
       `;
@@ -92,32 +92,31 @@ export default function server({ verticals, port }) {
     console.log('Vertical: ', vertical.name);
     console.log('Serving: ', req.url);
 
-    const networkInterface = createNetworkInterface({
+    const link = new HttpLink({
       uri: `${LOWDOWN_HOST}/graphql/`,
     });
 
     const client = new ApolloClient({
-      networkInterface,
+      link,
+      cache: new InMemoryCache(),
+      ssrMode: true,
     });
 
-    const finalCreateStore = compose(applyMiddleware(client.middleware()))(
-      createStore
-    );
+    const finalCreateStore = compose()(createStore);
 
     const store = finalCreateStore(
       combineReducers({
-        apollo: client.reducer(),
         config: getClientVerticalConfig(vertical),
       })
     );
     function handle404Error() {
       res.status(404).send(
         renderFullPage(
-          <ApolloProvider store={store} key="provider">
+          <Provider store={store} key="provider">
             <StaticRouter location={req.url} context={context}>
               <vertical.Application />
             </StaticRouter>
-          </ApolloProvider>,
+          </Provider>,
           store
         )
       );
@@ -125,32 +124,38 @@ export default function server({ verticals, port }) {
 
     function handle500Error(err) {
       console.log(err);
-      res.status(500).send(hydrateOnClient(vertical, store));
+      res.status(500).send(hydrateOnClient(vertical, store, client));
     }
 
     // todo: this might not be 200, check context
     getDataFromTree(
-      <ApolloProvider store={store} client={client} key="provider">
-        <StaticRouter location={req.url} context={context}>
-          <vertical.Application />
-        </StaticRouter>
-      </ApolloProvider>
+      <Provider store={store} key="provider">
+        <ApolloProvider client={client} key="apollo">
+          <StaticRouter location={req.url} context={context}>
+            <vertical.Application />
+          </StaticRouter>
+        </ApolloProvider>
+      </Provider>
     )
       .then(() => {
         res.status(200).send(
           renderFullPage(
             vertical,
-            <ApolloProvider store={store} client={client} key="provider">
-              <StaticRouter location={req.url} context={context}>
-                <vertical.Application />
-              </StaticRouter>
-            </ApolloProvider>,
-            store
+            <Provider store={store} key="provider">
+              <ApolloProvider client={client} key="apollo">
+                <StaticRouter location={req.url} context={context}>
+                  <vertical.Application />
+                </StaticRouter>
+              </ApolloProvider>
+            </Provider>,
+            store,
+            client
           )
         );
       })
-      .catch(() => {
-        res.status(500).send(hydrateOnClient(vertical, store));
+      .catch(error => {
+        console.log(error);
+        res.status(500).send(hydrateOnClient(vertical, store, client));
       });
 
     // old shit
@@ -180,11 +185,11 @@ export default function server({ verticals, port }) {
   app.use('/dist', express.static(`${__dirname}/../dist`));
   app.use('/external/ogimage/:contentId', (req, res) => {
     const vertical = getVertical(req.hostname, verticals);
-    const networkInterface = createNetworkInterface({
+    const link = new HttpLink({
       uri: `${LOWDOWN_HOST}/graphql/`,
     });
 
-    vertical.external(networkInterface, req, res);
+    vertical.external(link, req, res);
   });
   app.use('/interactive-frame/:slug/v:rid', (req, res) => {
     const interactiveSlug = req.params.slug;

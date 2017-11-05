@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FrontContainer from '../components/FrontContainer';
 import LoadingIndicator from '../components/LoadingIndicator';
-import { gql, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import { Helmet } from 'react-helmet';
 
 class HomePage extends React.Component {

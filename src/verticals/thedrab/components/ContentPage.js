@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import gql from 'graphql-tag';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
 import Document from '../components/Spectrum/Document';
 import Byline from '../components/Byline';
 import FluidImage from '../components/FluidImage';
 import { imgixURL } from '../../../core/components/utils';
-import { gql } from 'react-apollo';
 import getPathForContent from '../utils/getPathForContent';
 
 class ContentPage extends React.Component {

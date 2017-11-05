@@ -1,12 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import FrontContainer from '../components/FrontContainer';
-import LoadingIndicator from '../components/LoadingIndicator';
-import { gql, graphql } from 'react-apollo';
 import { Helmet } from 'react-helmet';
 import FrontsHeader from '../components/FrontsHeader';
-import ErrorPage from '../components/ErrorPage';
-import NoContent from '../components/NoContent';
 
 function DisclaimerPage() {
   return (

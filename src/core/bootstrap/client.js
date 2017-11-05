@@ -7,12 +7,11 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  ApolloClient,
-  ApolloProvider,
-  createNetworkInterface,
-} from 'react-apollo';
+import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-client-preset';
+import { ApolloProvider } from 'react-apollo';
+
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import Raven from 'raven-js';
@@ -26,11 +25,12 @@ function client({ name, slug, Application, tracking }) {
   console.log(`UPSTANDING: ${name} v2. env: ${process.env.NODE_ENV}`);
 
   const LOWDOWN_HOST = process.env.LOWDOWN_HOST || 'http://localhost:8000';
-  const networkInterface = createNetworkInterface({
+  const link = new HttpLink({
     uri: `${LOWDOWN_HOST}/graphql/`,
   });
   const aClient = new ApolloClient({
-    networkInterface,
+    link,
+    cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
   });
 
   // eslint-disable-next-line no-undef
@@ -48,7 +48,8 @@ function client({ name, slug, Application, tracking }) {
               i[r] ||
               function() {
                 (i[r].q = i[r].q || []).push(arguments);
-              }), (i[r].l = 1 * new Date());
+              }),
+              (i[r].l = 1 * new Date());
             (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
             a.async = 1;
             a.src = g;
@@ -72,8 +73,6 @@ function client({ name, slug, Application, tracking }) {
 
   const middleware = [];
 
-  middleware.push(applyMiddleware(aClient.middleware()));
-
   // eslint-disable-next-line no-undef
   if (process.env.NODE_ENV === 'development') {
     // eslint-disable-next-line global-require
@@ -90,7 +89,6 @@ function client({ name, slug, Application, tracking }) {
   const store = finalCreateStore(
     combineReducers({
       config: state => state || null,
-      apollo: aClient.reducer(),
     }),
     window.__data
   );
@@ -100,13 +98,15 @@ function client({ name, slug, Application, tracking }) {
   initGA(history);
 
   ReactDOM.hydrate(
-    <ApolloProvider store={store} client={aClient}>
-      <Router history={history}>
-        <ScrollToTop>
-          <Application />
-        </ScrollToTop>
-      </Router>
-    </ApolloProvider>,
+    <Provider store={store}>
+      <ApolloProvider client={aClient}>
+        <Router history={history}>
+          <ScrollToTop>
+            <Application />
+          </ScrollToTop>
+        </Router>
+      </ApolloProvider>
+    </Provider>,
     document.getElementById('app')
   );
 }

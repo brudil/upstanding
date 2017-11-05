@@ -5,7 +5,7 @@ import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 
 function Html(props) {
-  const { vertical, assets, component, store } = props;
+  const { vertical, assets, component, store, client } = props;
   const content = component ? ReactDOM.renderToString(component) : '';
   const head = Helmet.rewind();
 
@@ -36,6 +36,16 @@ function Html(props) {
           }}
           charSet="UTF-8"
         />
+        {client ? (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.__APOLLO_STATE__=${serialize(
+                client.cache.extract()
+              )};`,
+            }}
+            charSet="UTF-8"
+          />
+        ) : null}
         <script src={assets.javascript[vertical.slug]} charSet="UTF-8" />
       </body>
     </html>
@@ -46,6 +56,7 @@ Html.propTypes = {
   assets: PropTypes.object,
   component: PropTypes.node,
   store: PropTypes.object,
+  client: PropTypes.object,
 };
 
 export default Html;
