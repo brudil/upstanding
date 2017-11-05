@@ -145,7 +145,9 @@ class ContentPage extends React.Component {
               </a>
             </div>
           </div>
-          <RelatedContent contentId={container.contentId} />
+          {container.contentId >= 0 ? (
+            <RelatedContent contentId={container.contentId} />
+          ) : null}
         </div>
       </div>
     );
