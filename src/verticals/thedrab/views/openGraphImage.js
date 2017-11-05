@@ -1,7 +1,11 @@
-import { ApolloClient, gql } from 'react-apollo';
+import { InMemoryCache } from 'apollo-client-preset';
+import { ApolloClient } from 'react-apollo';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+
 import { imgixText, imgixURL } from '../../../core/components/utils';
 
-export default function generateOpenGraphImage(networkInterface, req, res) {
+export default function generateOpenGraphImage(link, req, res) {
   // generate apollo client
 
   // query with info needed for opengraph image
@@ -9,7 +13,8 @@ export default function generateOpenGraphImage(networkInterface, req, res) {
   // gen url and redirect
 
   const client = new ApolloClient({
-    networkInterface,
+    link,
+    cache: new InMemoryCache(),
   });
 
   client
@@ -46,7 +51,7 @@ export default function generateOpenGraphImage(networkInterface, req, res) {
         txt64: new Buffer(content.headline)
           .toString('base64')
           .replace(/=/g, ''),
-        txtpad: 30,
+        txtpad: 70,
         bg: 'aa6D4D2D',
         txtclr: 'fff',
         txtsize: 80,
