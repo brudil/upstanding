@@ -69,8 +69,8 @@ class ContentPage extends React.Component {
             property="og:image"
             content={`https://thedrab.co/external/ogimage/${container.contentId}/`}
           />
-          <meta property="og:image:width" content="630" />
-          <meta property="og:image:height" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:width" content="1200" />
           <meta property="og:title" content={content.shortHeadline} />
           <meta property="og:description" content={content.standfirst} />
           <meta property="description" content={content.standfirst} />
