@@ -4,7 +4,7 @@
   "description": "Universial Redux application for the frontend of upstanding.com.",
   "main": "webpack.base.config.js",
   "engines": {
-    "node": "8.1.x"
+    "node": "8.x.x"
   },
   "dependencies": {
     "@brudil/drafty-constants": "^1.1.0",
