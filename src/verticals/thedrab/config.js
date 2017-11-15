@@ -21,6 +21,11 @@ export default {
     ssl: {
       force: true,
     },
-    hosts: ['thedrab.co', 'www.thedrab.co', 'thedrab.dev'],
+    hosts: [
+      'thedrab.co',
+      'www.thedrab.co',
+      'thedrab.dev',
+      'www-next.thedrab.co',
+    ],
   },
 };
