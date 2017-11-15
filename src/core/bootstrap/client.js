@@ -23,8 +23,8 @@ function client({ name, slug, Application, tracking }) {
   require('isomorphic-fetch');
 
   console.log(`UPSTANDING: ${name} v2. env: ${process.env.NODE_ENV}`);
-
   const LOWDOWN_HOST = process.env.LOWDOWN_HOST || 'http://localhost:8000';
+  console.log(`[lowdown]: endpoint ${LOWDOWN_HOST}`);
   const link = new HttpLink({
     uri: `${LOWDOWN_HOST}/graphql/`,
   });
