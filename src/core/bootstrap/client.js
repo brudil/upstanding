@@ -22,7 +22,7 @@ function client({ name, slug, Application, tracking }) {
   /* polyfill fetch */
   require('isomorphic-fetch');
 
-  console.log(`UPSTANDING: ${name} v2. env: ${process.env.NODE_ENV}`);
+  console.log(`UPSTANDING: ${name} v3. env: ${process.env.NODE_ENV}`);
   const LOWDOWN_HOST = process.env.LOWDOWN_HOST || 'http://localhost:8000';
   console.log(`[lowdown]: endpoint ${LOWDOWN_HOST}`);
   const link = new HttpLink({
