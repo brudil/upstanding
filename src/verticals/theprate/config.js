@@ -19,7 +19,7 @@ export default {
     ssl: {
       force: true,
     },
-    hosts: ['theprate.com', 'www.theprate.com', 'theprate.dev'],
+    hosts: ['theprate.com', 'www.theprate.com', 'theprate.local'],
   },
   verify: {
     'QbO04F87nw-2xvf25cdfL2BJVEDWxglDeyiofwsh9IQ':

@@ -24,7 +24,7 @@ export default {
     hosts: [
       'thedrab.co',
       'www.thedrab.co',
-      'thedrab.dev',
+      'thedrab.local',
       'www-next.thedrab.co',
     ],
   },
