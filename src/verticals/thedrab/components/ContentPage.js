@@ -5,7 +5,7 @@ import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
 import Document from '../components/Spectrum/Document';
 import Byline from '../components/Byline';
-import FluidImage from '../components/FluidImage';
+import { OneImage, AspectRatio } from '../../../core/components/OneImage';
 import { imgixURL } from '../../../core/components/utils';
 import getPathForContent from '../utils/getPathForContent';
 import RelatedContent from './RelatedContent';
@@ -93,10 +93,11 @@ class ContentPage extends React.Component {
             )}
             {hidePosterImage ? null : (
               <figure className="Content__posterImage">
-                <FluidImage
-                  src={posterImageUrl}
+                <OneImage
+                  src={content.posterImage.resourceName}
                   role="presentation"
-                  ratio={imageHeight / imageWidth}
+                  aspectRatio={AspectRatio.r20by9}
+                  alt=""
                 />
                 <figcaption>
                   <span className="Content__posterImage-credit">

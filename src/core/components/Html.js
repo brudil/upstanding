@@ -21,7 +21,7 @@ function Html(props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* styles (will be present only in production with webpack extract text plugin) */}
         <link
-          href={assets.styles[vertical.slug]}
+          href={assets[vertical.slug].css}
           media="screen, projection"
           rel="stylesheet"
           type="text/css"
@@ -46,7 +46,7 @@ function Html(props) {
             charSet="UTF-8"
           />
         ) : null}
-        <script src={assets.javascript[vertical.slug]} charSet="UTF-8" />
+        <script src={assets[vertical.slug].js} charSet="UTF-8" />
       </body>
     </html>
   );

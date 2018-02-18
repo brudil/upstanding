@@ -51,6 +51,7 @@ module.exports = {
 
   resolve: {
     modules: ['web_modules', 'node_modules', './src/images'],
+    extensions: ['.js', '.ts', '.tsx']
   },
 
   plugins: [
@@ -63,7 +64,7 @@ module.exports = {
       __CURRENT_ENV__: `'${NODE_ENV}'`,
     }),
     ...developmentPlugins,
-    webpackIsomorphicToolsInstance,
+    // webpackIsomorphicToolsInstance,
   ],
 
   module: {
@@ -71,6 +72,19 @@ module.exports = {
       {
         test: /\.json$/,
         loader: 'json-loader',
+      },
+      {
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'awesome-typescript-loader?useBabel=true&useCache=true',
+            options: {
+              useBabel: true,
+              useCache: true,
+              reportFiles: ['src/**/*.{ts,tsx}'],
+            },
+          },
+        ],
       },
       {
         test: /\.js$/,

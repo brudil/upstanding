@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FrontContainer from '../components/FrontContainer';
 import LoadingIndicator from '../components/LoadingIndicator';
+import { FrontsPaginator } from '../components/FrontsPaginator';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Helmet } from 'react-helmet';
 
 class HomePage extends React.Component {
   render() {
-    const { data: { loading, vertical } } = this.props;
+    const { data: { loading, vertical, loadMore }} = this.props;
     if (loading || !vertical) {
       return <LoadingIndicator />;
     }
@@ -24,6 +25,8 @@ class HomePage extends React.Component {
         {nodes.length > 0
           ? <FrontContainer title="Latest" content={nodes} />
           : null}
+
+        <FrontsPaginator hasMore={vertical.allContent.pageInfo.hasNextPage} loadMore={loadMore} />
       </div>
     );
   }
@@ -36,9 +39,13 @@ HomePage.propTypes = {
 };
 
 const HomePageData = gql`
-  query FrontContent($identifier: String) {
+  query FrontContent($identifier: String, $cursor: String) {
     vertical(identifier: $identifier) {
-      allContent {
+      allContent(first: 3, after: $cursor) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
         edges {
           node {
             ...FrontsContent
@@ -56,6 +63,35 @@ const HomepageWithData = graphql(HomePageData, {
       identifier: 'thedrab',
     },
   },
+  props({ data: { vertical, loading, fetchMore } }) {
+    return {data: {
+      vertical,
+      loading,
+      loadMore: () => {
+        return fetchMore({
+          query: HomePageData,
+          variables: {
+            identifier: 'thedrab',
+            cursor: vertical.allContent.pageInfo.endCursor,
+          },
+          updateQuery: (previousResult, { fetchMoreResult }) => {
+            const newEdges = fetchMoreResult.vertical.allContent.edges;
+            const pageInfo = fetchMoreResult.vertical.allContent.pageInfo;
+
+            return newEdges.length ? {
+              vertical: {
+                allContent: {
+                  pageInfo,
+                  edges: [...previousResult.vertical.allContent.edges, ...newEdges],
+                  __typename: previousResult.vertical.allContent.__typename,
+                }
+              }
+            } : previousResult;
+          }
+        })
+      }
+    }};
+  }
 })(HomePage);
 
 export default HomepageWithData;

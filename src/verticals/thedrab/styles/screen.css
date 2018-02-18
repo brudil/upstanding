@@ -13,6 +13,7 @@
 @import '../../../core/styles/components/Site.css';
 @import '../../../core/styles/components/Container.css';
 @import '../../../core/styles/components/Main.css';
+@import '../../../core/styles/components/ResponsiveRatio.css';
 
 /* components */
 @import 'components/body.css';
@@ -51,7 +52,5 @@
 @import 'components/FrontsContent.css';
 @import 'components/FrontsContainer.css';
 @import 'components/FrontsHeader.css';
+@import 'components/FrontsPaginator.css';
 @import 'components/NoContent.css';
-
-/* Utils */
-@import 'utils/aspect.css';

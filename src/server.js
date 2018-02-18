@@ -23,13 +23,22 @@ require('isomorphic-fetch');
 
 const LOWDOWN_HOST = process.env.LOWDOWN_HOST || 'http://localhost:8000';
 
+const assets = new Proxy({}, {
+  get(target, name) {
+    return {
+      js: `http://localhost:8088/build/${name}.application.js`,
+      css: `http://localhost:8088/build/${name}.style.css`,
+    }
+  }
+}) || require('../assets.json');
+
 function renderFullPage(vertical, component, store, client) {
   return `
       <!doctype html>
       ${renderToString(
         <Html
           vertical={vertical}
-          assets={global.webpack_isomorphic_tools.assets()}
+          assets={assets}
           component={component}
           store={store}
           client={client}
@@ -44,7 +53,7 @@ function hydrateOnClient(vertical, store, client) {
         ${renderToString(
           <Html
             vertical={vertical}
-            assets={global.webpack_isomorphic_tools.assets()}
+            assets={assets}
             store={store}
             client={client}
           />

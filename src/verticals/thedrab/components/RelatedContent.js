@@ -21,7 +21,7 @@ function RelatedContent(props) {
         <div>
           <h2>More content</h2>
           <div className="FrontsContainer__grid">
-            {relatedContent.map(contentItem => (
+            {relatedContent.map((contentItem, index) => (
               <FrontsContent
                 grid
                 content={contentItem}

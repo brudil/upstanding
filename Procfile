@@ -1,1 +1,1 @@
-web: node src/server-entry.js
+web: node server-dist/server.js

@@ -15,6 +15,10 @@
   font-size: 16px;
   line-height: 1.5;
   font-family: var(--typeface__display);
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
 
   @media (--large) {
     font-size: 17px;

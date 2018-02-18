@@ -8,10 +8,11 @@ import { Helmet } from 'react-helmet';
 import FrontsHeader from '../components/FrontsHeader';
 import ErrorPage from "../components/ErrorPage";
 import NoContent from "../components/NoContent";
+import {FrontsPaginator} from "../components/FrontsPaginator";
 
 class HomePage extends React.Component {
   render() {
-    const { data: { loading, vertical, error } } = this.props;
+    const { data: { loading, vertical, error, loadMore } } = this.props;
     if (loading || !vertical) {
       return <LoadingIndicator />;
     }
@@ -33,6 +34,8 @@ class HomePage extends React.Component {
         {nodes.length > 0
           ? <FrontContainer title="Latest" content={nodes} />
           : <NoContent />}
+
+        <FrontsPaginator hasMore={vertical.allContent.pageInfo.hasNextPage} loadMore={loadMore} />
       </div>
     );
   }
@@ -45,9 +48,13 @@ HomePage.propTypes = {
 };
 
 const HomePageData = gql`
-  query FrontContent($identifier: String, $tone: Tone) {
+  query FrontContent($identifier: String, $tone: Tone, $cursor: String) {
     vertical(identifier: $identifier) {
-      allContent(tone: $tone) {
+      allContent(tone: $tone, first: 15, after: $cursor) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
         edges {
           node {
             ...FrontsContent
@@ -66,6 +73,35 @@ const HomepageWithData = graphql(HomePageData, {
       tone: props.match.params.tone.toUpperCase(),
     },
   }),
+  props({ data: { vertical, loading, fetchMore } }, match) {
+    return {data: {
+        vertical,
+        loading,
+        loadMore: () => {
+          return fetchMore({
+            query: HomePageData,
+            variables: {
+              identifier: 'thedrab',
+              cursor: vertical.allContent.pageInfo.endCursor,
+              tone: match.params.tone.toUpperCase(),
+            },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+              const newEdges = fetchMoreResult.vertical.allContent.edges;
+              const pageInfo = fetchMoreResult.vertical.allContent.pageInfo;
+
+              return newEdges.length ? {
+                vertical: {
+                  allContent: {
+                    pageInfo,
+                    edges: [...previousResult.vertical.allContent.edges, ...newEdges],
+                  }
+                }
+              } : previousResult;
+            }
+          })
+        }
+      }};
+  }
 })(HomePage);
 
 export default HomepageWithData;

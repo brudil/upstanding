@@ -8,10 +8,11 @@ import { Helmet } from 'react-helmet';
 import FrontsHeader from '../components/FrontsHeader';
 import ErrorPage from '../components/ErrorPage';
 import NoContent from '../components/NoContent';
+import {FrontsPaginator} from "../components/FrontsPaginator";
 
 class HomePage extends React.Component {
   render() {
-    const { data: { loading, vertical, error } } = this.props;
+    const { data: { loading, vertical, error, loadMore } } = this.props;
     console.log(this.props);
     if (loading) {
       return <LoadingIndicator />;
@@ -34,6 +35,9 @@ class HomePage extends React.Component {
         {nodes.length > 0
           ? <FrontContainer title="Latest" content={nodes} />
           : <NoContent />}
+
+        <FrontsPaginator hasMore={vertical.section.allContent.pageInfo.hasNextPage} loadMore={loadMore} />
+
       </div>
     );
   }
@@ -46,7 +50,7 @@ HomePage.propTypes = {
 };
 
 const HomePageData = gql`
-  query FrontContent($identifier: String, $section: String) {
+  query FrontContent($identifier: String, $section: String, $cursor: String) {
     vertical(identifier: $identifier) {
       section(slug: $section) {
         title
@@ -59,7 +63,11 @@ const HomePageData = gql`
             }
           }
         }
-        allContent {
+        allContent(first: 15, after: $cursor) {
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
           edges {
             node {
               ...FrontsContent
@@ -79,6 +87,39 @@ const HomepageWithData = graphql(HomePageData, {
       section: props.match.params.section,
     },
   }),
+  props({ data: { vertical, loading, fetchMore } }, match) {
+    return {data: {
+        vertical,
+        loading,
+        loadMore: () => {
+          return fetchMore({
+            query: HomePageData,
+            variables: {
+              identifier: 'thedrab',
+              cursor: vertical.section.allContent.pageInfo.endCursor,
+              section: match.params.section,
+            },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+              const newEdges = fetchMoreResult.vertical.section.allContent.edges;
+              const pageInfo = fetchMoreResult.vertical.section.allContent.pageInfo;
+
+              return newEdges.length ? {
+                vertical: {
+                  section: {
+                    ...previousResult.vertical.section,
+                    allContent: {
+                      pageInfo,
+                      edges: [...previousResult.vertical.allContent.edges, ...newEdges],
+                    }
+                  }
+                }
+              } : previousResult;
+            }
+          })
+        }
+      }};
+  }
+
 })(HomePage);
 
 export default HomepageWithData;

@@ -36,3 +36,6 @@ dist
 assets.json
 webpack-assets.json
 /.keys
+/server-dist
+/server-assets.json
+/.awcache

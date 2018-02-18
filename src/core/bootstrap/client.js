@@ -17,6 +17,12 @@ import { createBrowserHistory } from 'history';
 import Raven from 'raven-js';
 import ScrollToTop from '../components/ScrollToTop';
 
+import 'lazysizes/plugins/bgset/ls.bgset';
+// @ts-ignore
+import lazySizes from 'lazysizes';
+
+lazySizes.init();
+
 function client({ name, slug, Application, tracking }) {
   process.env.LOWDOWN_VERTICAL_IDENTIFIER = slug;
   /* polyfill fetch */

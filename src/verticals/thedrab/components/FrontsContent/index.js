@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import formatDistance from 'date-fns/formatDistance';
-import Image from '../Image';
+import { OneImage, AspectRatio } from '../../../../core/components/OneImage';
 import { Link } from 'react-router-dom';
 import getPathForContent from '../../utils/getPathForContent';
 
@@ -40,7 +40,11 @@ function FrontsContent({
           'u-aspect-169': square,
         })}
       >
-        <Image resource={content.posterImage} />
+        <OneImage
+          src={content.posterImage.resourceName}
+          aspectRatio={AspectRatio.r20by9}
+          alt=""
+        />
       </div>
       <div className="FrontsContent__info">
         <div className="FrontsContent__meta">
