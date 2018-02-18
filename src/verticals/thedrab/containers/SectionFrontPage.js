@@ -87,7 +87,7 @@ const HomepageWithData = graphql(HomePageData, {
       section: props.match.params.section,
     },
   }),
-  props({ data: { vertical, loading, fetchMore } }, match) {
+  props({ data: { vertical, loading, fetchMore }, match}) {
     return {data: {
         vertical,
         loading,

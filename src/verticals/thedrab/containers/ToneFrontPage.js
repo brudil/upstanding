@@ -73,7 +73,7 @@ const HomepageWithData = graphql(HomePageData, {
       tone: props.match.params.tone.toUpperCase(),
     },
   }),
-  props({ data: { vertical, loading, fetchMore } }, match) {
+  props({ data: { vertical, loading, fetchMore }, match}) {
     return {data: {
         vertical,
         loading,
