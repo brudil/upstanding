@@ -110,12 +110,12 @@
     "lint": "`npm bin`/eslint ./src/;exit 0",
     "lintcss": "`npm bin`/stylelint ./src/;exit 0",
     "coverage": "babel-node node_modules/.bin/isparta cover --report text --report html node_modules/.bin/_mocha -- --reporter dot",
-    "dist": "export NODE_ENV=production && `npm bin`/webpack",
+    "dist": "export NODE_ENV=production && `npm bin`/webpack --config=webpack.prod.config ",
     "serve": "NODE_ENV=development `npm bin`/webpack-dev-server --config webpack.dev.config --history-api-fallback --hot --port 8088",
     "build-server": "NODE_ENV=production `npm bin`/webpack --config webpack.server.config",
     "build-server-dev": "NODE_ENV=development LOWDOWN_HOST=\"http://localhost:8000\" `npm bin`/webpack --config webpack.server.config",
     "ss": "NODE_ENV=development nodemon src/server-entry.js",
-    "heroku-postbuild": "NODE_ENV=production `npm bin`/webpack --config=webpack.prod.config && NODE_ENV=production `npm bin`/webpack --config=webpack.server.config"
+    "heroku-postbuild": "yarn dist && yarn build-server"
   },
   "repository": {
     "type": "git",
