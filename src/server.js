@@ -4,6 +4,7 @@ server application entry point
 
 */
 
+import path from 'path';
 import express from 'express';
 import React from 'react';
 import _ from 'lodash';
@@ -23,14 +24,14 @@ require('isomorphic-fetch');
 
 const LOWDOWN_HOST = process.env.LOWDOWN_HOST || 'http://localhost:8000';
 
-const assets = new Proxy({}, {
+const assets = require('../assets.json') || new Proxy({}, {
   get(target, name) {
     return {
       js: `http://localhost:8088/build/${name}.application.js`,
       css: `http://localhost:8088/build/${name}.style.css`,
     }
   }
-}) || require('../assets.json');
+});
 
 function renderFullPage(vertical, component, store, client) {
   return `
@@ -191,7 +192,7 @@ export default function server({ verticals, port }) {
     app.use(Raven.requestHandler());
   }
 
-  app.use('/dist', express.static(`${__dirname}/../dist`));
+  app.use('/dist', express.static(path.join(__dirname, `./../dist`)));
   app.use('/external/ogimage/:contentId', (req, res) => {
     const vertical = getVertical(req.hostname, verticals);
     const link = new HttpLink({

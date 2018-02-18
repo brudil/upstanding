@@ -20,6 +20,11 @@ config.output = {
   filename: 'server.js',
 };
 
+config.node = {
+  __dirname: false,
+  __filename: false,
+};
+
 config.entry = {
   // theprate: [
   //   'babel-polyfill',
@@ -31,9 +36,6 @@ config.entry = {
 
 config.plugins = config.plugins.concat([
   new ExtractTextPlugin('[name].[contenthash].css'),
-  new webpack.DefinePlugin({
-    'process.env.LOWDOWN_HOST': `'${process.env.LOWDOWN_HOST}'`,
-  }),
   new SaveAssetsJson({
     path: process.cwd(),
     filename: 'server-assets.json',
