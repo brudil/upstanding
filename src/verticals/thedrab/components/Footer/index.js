@@ -10,9 +10,8 @@ export default function Footer() {
           <Logo white />
         </div>
         <div className="Footer__tag">
-          is a satirical endeavor by{' '}
-          <a href="https://www.facebook.com/sussexcomedysociety/">The Sussex Comedy Society</a>.
-          <Link className="Footer__disclaimer" to="/disclaimer">Disclaimer</Link>
+          is a satirical endeavor, and not the actual news.
+          <Link className="Footer__disclaimer" to="/disclaimer"> Disclaimer</Link>
         </div>
       </div>
     </footer>
