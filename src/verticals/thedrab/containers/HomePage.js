@@ -9,16 +9,19 @@ import { Helmet } from 'react-helmet';
 
 class HomePage extends React.Component {
   render() {
-    const { data: { loading, vertical, loadMore }} = this.props;
+    const { data: { loading, vertical, loadMore }, match} = this.props;
     if (loading || !vertical) {
       return <LoadingIndicator />;
     }
     const nodes = vertical.allContent.edges.map(edge => edge.node);
 
+    const isBitch = match.url.indexOf('/bitch') === 0;
+
+
     return (
       <div className="Main">
         <Helmet>
-          <title>The Drab | Be content, not content</title>
+          <title>{isBitch ? 'Bitch: for gals who want gendered media verticals' : 'The Drab | Be content, not content'}</title>
           <meta property="og:image" content="" />
           <meta property="og:description" content={'The Drab'} />
         </Helmet>
