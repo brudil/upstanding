@@ -36,6 +36,10 @@ function RootContainer() {
       <Switch>
         <Route path="/bitch"  component={(props) => (
           <div>
+            <Helmet
+              titleTemplate="%s | Bitch"
+              defaultTitle="Bitch"
+            />
             <BitchHeader />
             <div className="Site__main Site__main--bitch">
               <Switch>

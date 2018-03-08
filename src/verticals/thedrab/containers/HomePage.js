@@ -41,7 +41,7 @@ HomePage.propTypes = {
 const HomePageData = gql`
   query FrontContent($identifier: String, $cursor: String, $channel: String) {
     vertical(identifier: $identifier) {
-      allContent(first: 15, after: $cursor, channel: $channel) {
+      allContent(first: 3, after: $cursor, channel: $channel) {
         pageInfo {
           hasNextPage
           endCursor
@@ -64,7 +64,7 @@ const HomepageWithData = graphql(HomePageData, {
       channel: props.match.url.indexOf('/bitch') === 0 ? 'BITCH' : null,
     },
   }),
-  props({ match, data: { vertical, loading, fetchMore } }) {
+  props({data: { vertical, loading, fetchMore }, ownProps: { match } }) {
     return {data: {
       vertical,
       loading,

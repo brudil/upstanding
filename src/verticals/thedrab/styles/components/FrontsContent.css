@@ -137,4 +137,8 @@
     text-transform: lowercase;
     color: var(--color__secondary--bitch);
   }
+
+  &__kicker {
+    text-transform: lowercase;
+  }
 }

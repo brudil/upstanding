@@ -71,7 +71,7 @@ const HomepageWithData = graphql(HomePageData, {
       channel: props.match.url.indexOf('/bitch') === 0 ? 'BITCH' : null,
     },
   }),
-  props({ data: { vertical, loading, fetchMore }, match}) {
+  props({data: { vertical, loading, fetchMore }, ownProps: { match } }) {
     return {data: {
         vertical,
         loading,

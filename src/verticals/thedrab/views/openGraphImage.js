@@ -23,6 +23,7 @@ export default function generateOpenGraphImage(link, req, res) {
             content(contentId: $contentId) {
               content {
                 headline
+                channel
                 posterImage {
                   resourceName
                 }
@@ -37,29 +38,31 @@ export default function generateOpenGraphImage(link, req, res) {
     })
     .then(result => {
       const content = result.data.vertical.content.content;
+      const isBitch = content.channel === 'BITCH';
 
       const textBlend = imgixText({
         fm: 'png',
         textfit: 'max',
         h: 630,
         w: 1200,
-        txtfont64: new Buffer('Helvetica Neue Condensed, Bold').toString(
+        txtfont64: new Buffer(isBitch ? 'Futura-Medium' : 'Helvetica Neue Condensed, Bold').toString(
           'base64'
         ),
         txt64: new Buffer(`${content.headline}`)
           .toString('base64')
           .replace(/=/g, ''),
         txtpad: 60,
-        bg: 'aa6D4D2D',
+        bg: isBitch ? '22fc2aa4' : 'aa6D4D2D',
         txtclr: 'fff',
         txtsize: 80,
+        txtshad: isBitch ? 20 : 0
       });
 
       const sharer = imgixURL(content.posterImage.resourceName, {
         fit: 'crop',
         bm: 'normal',
         markw: 220,
-        mark: 'https://drafty.imgix.net/50d2c118-344a-40be-9d13-47d7b2840292',
+        mark: isBitch ? 'https://drafty.imgix.net/eb3e0a51-10f4-49de-a054-042c2d277f95' : 'https://drafty.imgix.net/50d2c118-344a-40be-9d13-47d7b2840292',
         h: 630,
         w: 1200,
         markpad: 60,
