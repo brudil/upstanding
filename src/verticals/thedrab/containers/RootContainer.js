@@ -39,7 +39,11 @@ function RootContainer() {
             <Helmet
               titleTemplate="%s | Bitch"
               defaultTitle="Bitch"
-            />
+            >
+              <meta property="og:image" content="https://drafty.imgix.net/a9242096-73ef-4771-b56b-f841473e5391" />
+              <meta property="og:image:height" content="660" />
+              <meta property="og:image:width" content="1200" />
+            </Helmet>
             <BitchHeader />
             <div className="Site__main Site__main--bitch">
               <Switch>
