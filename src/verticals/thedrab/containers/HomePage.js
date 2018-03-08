@@ -22,7 +22,6 @@ class HomePage extends React.Component {
       <div className="Main">
         <Helmet>
           <title>{isBitch ? 'Bitch: for gals who want gendered media verticals' : 'The Drab | Be content, not content'}</title>
-          <meta property="og:image" content="" />
           <meta property="og:description" content={'The Drab'} />
         </Helmet>
         {nodes.length > 0
