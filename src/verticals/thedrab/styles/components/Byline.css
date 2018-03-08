@@ -14,3 +14,9 @@
     }
   }
 }
+
+.Site__main--bitch .Byline {
+  &__link {
+    color: var(--color__secondary--bitch);
+  }
+}

@@ -3,6 +3,7 @@ import cx from 'classnames';
 import formatDistance from 'date-fns/formatDistance';
 import { OneImage, AspectRatio } from '../../../../core/components/OneImage';
 import { Link } from 'react-router-dom';
+import BitchLogo from '../bitch/BitchLogo';
 import getPathForContent from '../../utils/getPathForContent';
 
 function ComputedKicker({ content }) {
@@ -29,6 +30,7 @@ function FrontsContent({
   return (
     <div
       className={cx('FrontsContent', {
+        'FrontsContent--bitch': content.channel === 'BITCH',
         'FrontsContent--hero': hero,
         'FrontsContent--hero-square': square,
         'FrontsContent--grid': grid,
@@ -48,6 +50,9 @@ function FrontsContent({
       </div>
       <div className="FrontsContent__info">
         <div className="FrontsContent__meta">
+          {content.channel === 'BITCH' ? <div className="FrontsContent__channel FrontsContent__channel--bitch">
+            <BitchLogo />
+          </div> : null}
           <span className="FrontsContent__kicker">
             <ComputedKicker content={content} />
           </span>

@@ -104,3 +104,37 @@
     width: calc(100% - 30px);
   }
 }
+
+.FrontsContent__channel {
+  height: 16px;
+  display: inline-block;
+  padding-right: 10px;
+
+  svg {
+    height: 100%;
+    width: auto;
+  }
+}
+
+.FrontsContent__channel--bitch {
+  color: var(--color__secondary--bitch);
+}
+
+.FrontsContent--bitch{
+  font-family: var(--typeface__headline--bitch);
+}
+
+.FrontsContent--bitch .FrontsContent {
+  font-family: var(--typeface__headline--bitch);
+
+  &__headline {
+    &-link {
+      color: var(--color__accent--bitch);
+    }
+  }
+
+  &__meta {
+    text-transform: lowercase;
+    color: var(--color__secondary--bitch);
+  }
+}

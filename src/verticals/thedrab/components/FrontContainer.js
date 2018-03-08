@@ -46,6 +46,7 @@ FrontContainer.fragments = {
         headline
         kicker
         tone
+        channel
         authors {
           id
           name

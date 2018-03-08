@@ -71,6 +71,7 @@ const HomepageWithData = graphql(HomePageData, {
     variables: {
       identifier: 'thedrab',
       tone: props.match.params.tone.toUpperCase(),
+      channel: props.match.url.indexOf('/bitch') === 0 ? 'BITCH' : null
     },
   }),
   props({ data: { vertical, loading, fetchMore }, match}) {
@@ -84,6 +85,7 @@ const HomepageWithData = graphql(HomePageData, {
               identifier: 'thedrab',
               cursor: vertical.allContent.pageInfo.endCursor,
               tone: match.params.tone.toUpperCase(),
+              channel: match.url.indexOf('/bitch') === 0 ? 'BITCH' : null
             },
             updateQuery: (previousResult, { fetchMoreResult }) => {
               const newEdges = fetchMoreResult.vertical.allContent.edges;

@@ -1,7 +1,7 @@
 import React from 'react';
 import sample from 'lodash/sample';
 import { Link } from 'react-router-dom';
-import Logo from '../Logo';
+import Logo from '../BitchLogo';
 import taglines from './taglines';
 
 const Nav = () =>
@@ -30,9 +30,9 @@ const Nav = () =>
     </ul>
   </nav>;
 
-function Header() {
+function BitchHeader() {
   return (
-    <header className="Header">
+    <header className="Header Header--bitch">
       <div className="Container Header__container Header__container--top">
         <div className="Header__logo-container">
           <Link to="/" className="Header__logo">
@@ -53,5 +53,5 @@ function Header() {
   );
 }
 
-Header.propTypes = {};
-export default Header;
+BitchHeader.propTypes = {};
+export default BitchHeader;

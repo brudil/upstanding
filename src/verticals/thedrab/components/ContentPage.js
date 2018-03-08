@@ -169,6 +169,7 @@ ContentPage.fragments = {
         slug
       }
       form
+      channel
       slug
       document
       posterImage {

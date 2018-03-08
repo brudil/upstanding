@@ -39,9 +39,9 @@ HomePage.propTypes = {
 };
 
 const HomePageData = gql`
-  query FrontContent($identifier: String, $cursor: String) {
+  query FrontContent($identifier: String, $cursor: String, $channel: String) {
     vertical(identifier: $identifier) {
-      allContent(first: 15, after: $cursor) {
+      allContent(first: 15, after: $cursor, channel: $channel) {
         pageInfo {
           hasNextPage
           endCursor
@@ -58,12 +58,13 @@ const HomePageData = gql`
 `;
 
 const HomepageWithData = graphql(HomePageData, {
-  options: {
+  options: props => ({
     variables: {
       identifier: 'thedrab',
+      channel: props.match.url.indexOf('/bitch') === 0 ? 'BITCH' : null,
     },
-  },
-  props({ data: { vertical, loading, fetchMore } }) {
+  }),
+  props({ match, data: { vertical, loading, fetchMore } }) {
     return {data: {
       vertical,
       loading,
@@ -73,6 +74,7 @@ const HomepageWithData = graphql(HomePageData, {
           variables: {
             identifier: 'thedrab',
             cursor: vertical.allContent.pageInfo.endCursor,
+            channel: match.url.indexOf('/bitch') === 0 ? 'BITCH' : null,
           },
           updateQuery: (previousResult, { fetchMoreResult }) => {
             const newEdges = fetchMoreResult.vertical.allContent.edges;

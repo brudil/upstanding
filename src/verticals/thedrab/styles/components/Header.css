@@ -1,8 +1,11 @@
 .Header {
   background-color: #fff;
   color: #000;
-  padding-top: 1lh;
   padding-bottom: 0.5lh;
+
+  &__container--top {
+    margin-top: 1lh;
+  }
 
   &__container {
     display: flex;
@@ -19,6 +22,11 @@
     width: 140px;
     text-decoration: none;
     margin: 0 auto;
+
+    & svg {
+      width: 100%;
+      height: auto;
+    }
   }
 
   &__logo-container {
@@ -85,5 +93,20 @@
         display: none;
       }
     }
+  }
+}
+
+.Header--bitch::before {
+  background: linear-gradient(135deg, #ff59fc 0%,#f9005f 100%);
+  width: 100%;
+  height: 12px;
+  content: "";
+  display: block;
+  position: relative;
+}
+
+.Header--bitch .Header {
+  &__logo {
+    color: #fc2aa4;
   }
 }

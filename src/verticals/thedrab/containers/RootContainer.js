@@ -3,6 +3,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Route, Switch } from 'react-router-dom';
 import Header from '../components/Header';
+import BitchHeader from '../components/bitch/Header';
 import Footer from '../components/Footer';
 import dnsPrefetchLinks from './head/dnsPrefetchLinks';
 import brandingLinks from './head/brandingLinks';
@@ -32,25 +33,51 @@ function RootContainer() {
         ]}
         meta={[...brandingMeta]}
       />
-      <Header />
-      <div className="Site__main">
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/disclaimer" component={DisclaimerPage} />
-          <Route path="/form/:form" component={FormFrontPage} />
-          <Route path="/tone/:tone" component={ToneFrontPage} />
-          <Route path="/author/:author" component={AuthorFrontPage} />
-          <Route
-            path="/preview/:revisionId/:previewKey"
-            component={PreviewContentPage}
-            exact
-          />
-          <Route path="/:form/**-:contentId" component={ContentPage} exact />
-          <Route path="/:section" component={SectionFrontPage} />
-          <Route component={NotFoundPage} />
-        </Switch>
-      </div>
-      <Footer />
+      <Switch>
+        <Route path="/bitch"  component={(props) => (
+          <div>
+            <BitchHeader />
+            <div className="Site__main Site__main--bitch">
+              <Switch>
+                <Route exact path="/bitch" component={HomePage} />
+                <Route
+                  path="/bitch/preview/:revisionId/:previewKey"
+                  component={PreviewContentPage}
+                  exact
+                />
+                <Route path="/bitch/form/:form" component={FormFrontPage} />
+                <Route path="/bitch/tone/:tone" component={ToneFrontPage} />
+                <Route path="/bitch/:form/**-:contentId" component={ContentPage} exact />
+                <Route component={NotFoundPage} />
+              </Switch>
+            </div>
+            <Footer />
+          </div>
+        )}/>
+        <Route path="/" component={() => (
+          <div>
+            <Header />
+            <div className="Site__main">
+              <Switch>
+                <Route exact path="/" component={HomePage} />
+                <Route exact path="/disclaimer" component={DisclaimerPage} />
+                <Route path="/form/:form" component={FormFrontPage} />
+                <Route path="/tone/:tone" component={ToneFrontPage} />
+                <Route path="/author/:author" component={AuthorFrontPage} />
+                <Route
+                  path="/preview/:revisionId/:previewKey"
+                  component={PreviewContentPage}
+                  exact
+                />
+                <Route path="/:form/**-:contentId" component={ContentPage} exact />
+                <Route path="/:section" component={SectionFrontPage} />
+                <Route component={NotFoundPage} />
+              </Switch>
+            </div>
+            <Footer />
+          </div>
+        )}/>
+      </Switch>
     </div>
   );
 }

@@ -52,3 +52,21 @@
     }
   }
 }
+
+.Site__main--bitch .Content {
+  &__title {
+    font-family: var(--typeface__headline--bitch);
+    color: var(--color__accent--bitch);
+  }
+
+  &__kicker {
+    font-family: var(--typeface__headline--bitch);
+    color: var(--color__secondary--bitch);
+    text-transform: lowercase;
+  }
+
+  &__meta {
+    color: var(--color__secondary--bitch);
+    font-family: var(--typeface__headline--bitch);
+  }
+}
