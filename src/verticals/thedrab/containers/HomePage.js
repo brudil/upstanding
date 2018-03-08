@@ -41,7 +41,7 @@ HomePage.propTypes = {
 const HomePageData = gql`
   query FrontContent($identifier: String, $cursor: String, $channel: String) {
     vertical(identifier: $identifier) {
-      allContent(first: 3, after: $cursor, channel: $channel) {
+      allContent(first: 15, after: $cursor, channel: $channel) {
         pageInfo {
           hasNextPage
           endCursor
