@@ -210,6 +210,15 @@ export default function server({ verticals, port }) {
       )
     );
   });
+
+  app.use('/robots.txt', (req, res) => {
+    res.send(`
+    User-agent: *
+    Disallow: /admin
+    Disallow: /preview
+`);
+  })
+
   app.use(forceSsl);
   app.use(handleRender);
 
