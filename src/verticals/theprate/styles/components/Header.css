@@ -9,7 +9,8 @@
   padding-right: 100%;
   margin-right: -100%;
   margin-left: -100%;
-
+  margin-bottom: 3rem;
+  
   &__container--top {
     margin-top: 1lh;
   }
