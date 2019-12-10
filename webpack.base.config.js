@@ -35,7 +35,7 @@ module.exports = {
     //   'babel-polyfill',
     //   './src/verticals/theprate/application.js',
     // ],
-    thedrab: ['babel-polyfill', './src/verticals/thedrab/application.js'],
+    theprate: ['babel-polyfill', './src/verticals/theprate/application.js'],
   },
 
   output: {
