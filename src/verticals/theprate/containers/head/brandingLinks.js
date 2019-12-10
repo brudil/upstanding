@@ -30,4 +30,8 @@ export default [
     // eslint-disable-next-line global-require
     href: require('../../images/favicons/favicon.ico'),
   },
+  {
+    href: 'https://fonts.googleapis.com/css?family=Lato|Source+Sans+Pro',
+    rel: 'stylesheet',
+  },
 ];

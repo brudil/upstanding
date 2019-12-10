@@ -1,0 +1,39 @@
+.ImageBlock {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin: 0;
+
+  &--bleed {
+    max-width: 100%;
+  }
+
+  &--content {
+    max-width: 660px;
+  }
+
+  &--container {
+    max-width: 1000px;
+  }
+
+  &__meta {
+    font-size: 0.8em;
+    padding-top: 0.2em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+    color: var(--color__secondary);
+    display: flex;
+  }
+
+  &__caption {
+    font-style: italic;
+    margin-right: auto;
+    display: block;
+  }
+
+  &__credit {
+    display: block;
+    font-size: 0.9em;
+  }
+}

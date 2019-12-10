@@ -1,17 +1,19 @@
-import routes from './routes';
+import RootContainer from './containers/RootContainer';
 import NotFoundPage from './containers/NotFoundPage';
+import openGraphImageHandler from './views/openGraphImage';
 
 export default {
   name: 'The Prate',
   slug: 'theprate',
   lowdown: {
-    id: 'theprate',
+    id: 'thedrab',
   },
-  routes,
+  Application: RootContainer,
   tracking: {
     sentry: 'https://a43146803f4a4810b7aa7f779c5e2de6@app.getsentry.com/89808',
-    ga: 'UA-81648266-1',
+    ga: 'UA-81648266-2',
   },
+  external: openGraphImageHandler,
   pages: {
     notFound: NotFoundPage,
   },
@@ -19,18 +21,9 @@ export default {
     ssl: {
       force: true,
     },
-    hosts: ['theprate.com', 'www.theprate.com', 'theprate.local'],
-  },
-  verify: {
-    'QbO04F87nw-2xvf25cdfL2BJVEDWxglDeyiofwsh9IQ':
-      'QbO04F87nw-2xvf25cdfL2BJVEDWxglDeyiofwsh9IQ.RespT-jJ8qkJkdGqFV8QJJZx8tOiAcHpXZaAzBfltWI',
-    'i6-qMEMIpFNlL6MF8poTLY3OCa5Wz85t4cIbPobriXU':
-      'i6-qMEMIpFNlL6MF8poTLY3OCa5Wz85t4cIbPobriXU.RespT-jJ8qkJkdGqFV8QJJZx8tOiAcHpXZaAzBfltWI',
-    NlawinkYQuWQyxZ7hlf64tt7h0cpvx3kIe4nNNcjlAU:
-      'NlawinkYQuWQyxZ7hlf64tt7h0cpvx3kIe4nNNcjlAU.RespT-jJ8qkJkdGqFV8QJJZx8tOiAcHpXZaAzBfltWI',
-    zJRx6kbx2JMzio8acJfQZlZHc_YU9zTPM2RbDq7Vq5Q:
-      'zJRx6kbx2JMzio8acJfQZlZHc_YU9zTPM2RbDq7Vq5Q.RespT-jJ8qkJkdGqFV8QJJZx8tOiAcHpXZaAzBfltWI',
-    FYwmXWoXhDn1zlwEAF5ussGeKEjWo9LS97EZpxI0e_Y:
-      'FYwmXWoXhDn1zlwEAF5ussGeKEjWo9LS97EZpxI0e_Y.RespT-jJ8qkJkdGqFV8QJJZx8tOiAcHpXZaAzBfltWI',
+    hosts: [
+      'theprate.com',
+      'www.theprate.com',
+    ],
   },
 };

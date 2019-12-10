@@ -1,0 +1,13 @@
+.ContentPage {
+  box-sizing: border-box;
+  overflow: hidden;
+  padding-top: 0.5rem;
+
+  &__primary {
+    padding-top: 1.5rem;
+    box-sizing: border-box;
+  }
+
+  &__sidebar {
+  }
+}

@@ -1,57 +1,72 @@
+@import '../core/color.css';
+
 .Content {
-  box-sizing: border-box;
-  padding-top: ms(2) rem;
+  &__body {
+    overflow: hidden;
+  }
 
-  &__metadata {
-    color: var(--color__peter);
-    display: none;
+  &__title {
+    font-weight: 600;
+    font-size: 2.4rem;
+    font-family: var(--typeface__headline);
+    margin: 0;
+    line-height: 1;
+    padding-bottom: 1rem;
+    color: var(--color__accent)
+  }
+
+  &__kicker {
+    text-transform: uppercase;
+    font-family: var(--typeface__headline);
+    font-weight: 700;
+  }
+
+  &__meta {
+    margin-bottom: 1.5rem;
+    color: var(--color__secondary);
+    font-family: var(--typeface__headline);
     font-weight: 500;
   }
 
-  &__metadata-m {
+  &__posterImage {
+    padding: 0;
+    margin: 0 0 1.5rem;
+  }
+
+  &__posterImage-credit {
     display: block;
-    color: var(--color__peter);
-    font-weight: 500;
-  }
+    text-align: right;
+    color: var(--color__secondary);
+    font-size: 0.8rem;
+    padding-top: 0.2rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
 
-  @media screen and (min-width: 880px) {
-    display: flex;
+    & a {
+      color: var(--color__secondary);
+      text-decoration: none;
 
-    &__body {
-      flex: 1 1 auto;
-    }
-
-    &__metadata-m {
-      display: none;
-    }
-
-    &__metadata {
-      display: block;
-      border-right: 1px solid #e0e0e0;
-      width: 160px;
-    }
-
-    &__metadata-list {
-      & dt {
-        display: inline;
-        font-size: ms(-1)rem;
-        text-transform: uppercase;
-        padding-right: ms(-1)rem;
-      }
-
-      & dd {
-        display: inline;
-        margin: 0;
-      }
-
-      & dt, & dd {
-        display: block;
-      }
-
-      & dt + dd {
-        margin-bottom: ms(1)rem;
+      &:hover {
+        text-decoration: underline;
       }
     }
   }
+}
 
+.Site__main--bitch .Content {
+  &__title {
+    font-family: var(--typeface__headline--bitch);
+    color: var(--color__accent--bitch);
+  }
+
+  &__kicker {
+    font-family: var(--typeface__headline--bitch);
+    color: var(--color__secondary--bitch);
+    text-transform: lowercase;
+  }
+
+  &__meta {
+    color: var(--color__secondary--bitch);
+    font-family: var(--typeface__headline--bitch);
+  }
 }

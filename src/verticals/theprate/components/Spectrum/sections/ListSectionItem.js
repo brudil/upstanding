@@ -3,12 +3,11 @@ import React from 'react';
 import HeadingBlock from '../blocks/HeadingBlock';
 import ElementStream from '../ElementStream';
 
-function ListSectionItem(props) {
-  const { data: { title, stream } } = props;
+function ListSectionItem({ data: { title, stream }, resources }) {
   return (
     <li className="ListSection__item ListSectionItem">
-      <HeadingBlock data={title} />
-      <ElementStream stream={stream} />
+      <HeadingBlock data={title} resources={resources} />
+      <ElementStream stream={stream} resources={resources} />
     </li>
   );
 }

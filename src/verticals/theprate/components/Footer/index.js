@@ -1,12 +1,18 @@
 import React from 'react';
-import logotypeWhite from '../../images/logotype-white-site.svg';
+import Logo from '../Logo';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
     <footer className="Footer">
       <div className="Container">
-        <img className="Footer__logotype" src={logotypeWhite} alt="The Prate" />
-        <div className="Footer__tag">Some rights reserved.</div>
+        <div className="Footer__logo">
+          <Logo white />
+        </div>
+        <div className="Footer__tag">
+          is a satirical endeavor, and not the actual news.
+          <Link className="Footer__disclaimer" to="/disclaimer"> Disclaimer</Link>
+        </div>
       </div>
     </footer>
   );

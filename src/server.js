@@ -4,6 +4,7 @@ server application entry point
 
 */
 
+import fs from 'fs';
 import path from 'path';
 import express from 'express';
 import React from 'react';
@@ -24,7 +25,9 @@ require('isomorphic-fetch');
 
 const LOWDOWN_HOST = process.env.LOWDOWN_HOST || 'http://localhost:8000';
 
-const assets = require('../assets.json') || new Proxy({}, {
+console.log(fs.existsSync('../assets.json'));
+
+const assets = fs.existsSync('../assets.json') ? JSON.parse(fs.readFileSync('../assets.json', 'utf-8')) : new Proxy({}, {
   get(target, name) {
     return {
       js: `http://localhost:8088/build/${name}.application.js`,

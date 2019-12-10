@@ -1,5 +1,5 @@
 .CadeSection {
-  padding: ms(1)rem 0;
+  padding-bottom: ms(1)rem;
 
   &__title {
     margin-bottom: 1.5rem;

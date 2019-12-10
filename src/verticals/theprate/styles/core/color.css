@@ -1,8 +1,16 @@
 
 :root {
-  --color__background: #f6f6f6;
+  --color__background: #ffffff;
   --color__text-base: #222;
-  --color__accent: #9321f4;
-  --color__secondary: #31235d;
-  --color__peter: #78718E;
+  --color__accent: #6D4D2D;
+  --color__secondary: #6A6A6A;
+  --color__third: #c1c1c1;
+  --color__peter: #d6aaa8;
+
+  --color__background--bitch: #ffffff;
+  --color__text-base--bitch: #222;
+  --color__accent--bitch: #fc2aa4;
+  --color__secondary--bitch: #ff6d9c;
+  --color__third--bitch: #c1c1c1;
+  --color__peter--bitch: #ff8faa;
 }

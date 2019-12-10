@@ -7,7 +7,7 @@ function FrontMeta({ className, content }) {
     <div className={className}>
       {content.authors.map(author =>
         <span key={author.id}>
-          {author.first_name} {author.last_name}
+          {author.name}
         </span>
       )}
       <span> / </span>

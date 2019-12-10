@@ -5,34 +5,52 @@
 @import '../../../core/styles/components/Site.css';
 @import '../../../core/styles/components/Container.css';
 @import '../../../core/styles/components/Main.css';
-@import '../../../core/styles/components/Body.css';
+
+@import '../../../core/styles/core/mq.css';
+@import './core/typography.css';
+
+/* UPSTANDING: core*/
+@import '../../../core/styles/components/Site.css';
+@import '../../../core/styles/components/Container.css';
+@import '../../../core/styles/components/Main.css';
+@import '../../../core/styles/components/ResponsiveRatio.css';
 
 /* components */
-@import './components/body.css';
-@import './components/Header.css';
-@import './components/HeaderNav.css';
-@import './components/Footer.css';
-@import './components/Logo.css';
-@import './components/LoadingIndicator.css';
-@import './components/FluidImage.css';
-@import './components/Stonewall.css';
+@import 'components/body.css';
+@import 'components/Header.css';
+@import 'components/HeaderNav.css';
+@import 'components/Footer.css';
+@import 'components/Logo.css';
+@import 'components/LoadingIndicator.css';
+@import 'components/FluidImage.css';
+@import 'components/Stonewall.css';
 
 /* content page */
-@import './components/ContentPage.css';
-@import './components/Content.css';
-@import './components/ContentHeader.css';
-@import './components/Headline.css';
-@import './components/Byline.css';
+@import 'components/ContentPage.css';
+@import 'components/Content.css';
+@import 'components/ContentHeader.css';
+@import 'components/Headline.css';
+@import 'components/Byline.css';
 
 /* spectrum */
-@import './components/Spectrum/Document.css';
-@import './components/Spectrum/Block.css';
-@import './components/Spectrum/ListSection.css';
-@import './components/Spectrum/TextBlock.css';
+@import 'components/Spectrum/Document.css';
+@import 'components/Spectrum/Block.css';
+@import 'components/Spectrum/ListSection.css';
+@import 'components/Spectrum/TextBlock.css';
+@import 'components/Spectrum/ImageBlock.css';
+@import 'components/Spectrum/CanvasBlock.css';
+@import 'components/Spectrum/PullQuoteBlock.css';
 
 /* Cade */
-@import './components/Cade/CadeSection.css';
-@import './components/Cade/CadeGrid.css';
-@import './components/Cade/CadeGridContentCard.css';
-@import './components/Cade/CadeHero.css'; 
-@import './components/Cade/CadeHeroContent.css';
+@import 'components/Cade/CadeSection.css';
+@import 'components/Cade/CadeGrid.css';
+@import 'components/Cade/CadeGridContentCard.css';
+@import 'components/Cade/CadeHero.css'; 
+@import 'components/Cade/CadeHeroContent.css';
+
+/* Fronts */
+@import 'components/FrontsContent.css';
+@import 'components/FrontsContainer.css';
+@import 'components/FrontsHeader.css';
+@import 'components/FrontsPaginator.css';
+@import 'components/NoContent.css';

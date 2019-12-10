@@ -1,14 +1,17 @@
 .Document {
   font-family: var(--typeface__copy);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 1.66;
 
+  /*
   & .DocumentSection:first-child .TextBlock:first-child {
     &::first-letter {
       font-size: 3rem;
       font-weight: 700;
+      line-height: 3rem;
     }
   }
+  */
 
   & p {
     margin-bottom: 1rem;
@@ -16,21 +19,21 @@
   }
 
   & h1 {
-    font-size: ms(2) rem;
-    margin-bottom: ms(0);
-    margin-top: ms(0);
+    font-size: 1.1rem;
+    margin-bottom: 1lh;
+    margin-top: 1lh;
 
     @media screen and (min-width: 820px) {
-      font-size: ms(2.5) rem;
+      font-size: 1.4rem;
     }
 
     @media screen and (min-width: 1024px) {
-      font-size: ms(3) rem;
+      font-size: 1.6rem;
     }
   }
 
   & h2 {
-    font-size: ms(2.5) rem;
+    font-size: 1.3rem;
   }
 
   & a {

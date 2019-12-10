@@ -2,12 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ElementStream from '../ElementStream';
 
-function FreeformSection(props) {
-  const { data } = props;
-
+function FreeformSection({ data, resources }) {
   return (
     <section className="DocumentSection">
-      <ElementStream stream={data.stream} />
+      <ElementStream stream={data.stream} resources={resources} />
     </section>
   );
 }

@@ -4,11 +4,7 @@ import logotypeP from '../images/logotype-letter-p.svg';
 function LoadingIndicator() {
   return (
     <div className="LoadingIndicator">
-      <img
-        className="LoadingIndicator__indicator"
-        src={logotypeP}
-        alt="Loading"
-      />
+      <span className="LoadingIndicator__type">Loading</span>
     </div>
   );
 }

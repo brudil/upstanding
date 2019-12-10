@@ -1,55 +1,101 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { setFront } from '../../../core/ducks/Fronts';
+import PropTypes from 'prop-types';
 import FrontContainer from '../components/FrontContainer';
 import LoadingIndicator from '../components/LoadingIndicator';
+import { FrontsPaginator } from '../components/FrontsPaginator';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import { Helmet } from 'react-helmet';
 
 class HomePage extends React.Component {
-  componentWillMount() {
-    this.props.setFront('front');
-  }
-
   render() {
-    const { data, isLoading } = this.props;
-    if (isLoading || !data) {
+    const { data: { loading, vertical, loadMore }, match} = this.props;
+    if (loading || !vertical) {
       return <LoadingIndicator />;
     }
+    const nodes = vertical.allContent.edges.map(edge => edge.node);
+
+    const isBitch = match.url.indexOf('/bitch') === 0;
+
 
     return (
       <div className="Main">
-        <FrontContainer title="Latest" content={data} />
+        <Helmet>
+          <title>{isBitch ? 'Bitch: for gals who want gendered media verticals' : 'The Drab | Be content, not content'}</title>
+          <meta property="og:description" content={'The Drab'} />
+        </Helmet>
+        {nodes.length > 0
+          ? <FrontContainer title="Latest" content={nodes} />
+          : null}
+
+        <FrontsPaginator hasMore={vertical.allContent.pageInfo.hasNextPage} loadMore={loadMore} />
       </div>
     );
   }
 }
 
 HomePage.propTypes = {
-  setFront: PropTypes.func.isRequired,
-  data: PropTypes.array.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  data: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+  }).isRequired,
 };
 
-function mapStateToProps(state) {
-  const key = 'front';
-
-  if (!state.fronts.map.hasOwnProperty(key)) {
-    return { isLoading: true };
+const HomePageData = gql`
+  query FrontContent($identifier: String, $cursor: String, $channel: String) {
+    vertical(identifier: $identifier) {
+      allContent(first: 15, after: $cursor, channel: $channel) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        edges {
+          node {
+            ...FrontsContent
+          }
+        }
+      }
+    }
   }
-  const frontData = state.fronts.map[key];
-  return {
-    ...frontData,
-  };
-}
+  ${FrontContainer.fragments.content}
+`;
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      setFront,
+const HomepageWithData = graphql(HomePageData, {
+  options: props => ({
+    variables: {
+      identifier: 'thedrab',
+      channel: props.match.url.indexOf('/bitch') === 0 ? 'BITCH' : null,
     },
-    dispatch
-  );
-}
+  }),
+  props({data: { vertical, loading, fetchMore }, ownProps: { match } }) {
+    return {data: {
+      vertical,
+      loading,
+      loadMore: () => {
+        return fetchMore({
+          query: HomePageData,
+          variables: {
+            identifier: 'thedrab',
+            cursor: vertical.allContent.pageInfo.endCursor,
+            channel: match.url.indexOf('/bitch') === 0 ? 'BITCH' : null,
+          },
+          updateQuery: (previousResult, { fetchMoreResult }) => {
+            const newEdges = fetchMoreResult.vertical.allContent.edges;
+            const pageInfo = fetchMoreResult.vertical.allContent.pageInfo;
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+            return newEdges.length ? {
+              vertical: {
+                allContent: {
+                  pageInfo,
+                  edges: [...previousResult.vertical.allContent.edges, ...newEdges],
+                  __typename: previousResult.vertical.allContent.__typename,
+                }
+              }
+            } : previousResult;
+          }
+        })
+      }
+    }};
+  }
+})(HomePage);
+
+export default HomepageWithData;

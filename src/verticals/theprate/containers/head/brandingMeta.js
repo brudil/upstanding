@@ -1,14 +1,26 @@
 export default [
   {
     name: 'apple-mobile-web-app-title',
-    content: 'The Prate',
+    content: 'The Drab',
   },
   {
     name: 'application-name',
-    content: 'The Prate',
+    content: 'The Drab',
   },
   {
     name: 'theme-color',
-    content: '#825aff',
+    content: '#6D4D2D',
+  },
+  {
+    property: 'og:site_name',
+    content: 'The Drab',
+  },
+  {
+    property: 'fb:app_id',
+    content: '696155863910264',
+  },
+  {
+    property: 'fb:pages',
+    content: '1302392339858247',
   },
 ];

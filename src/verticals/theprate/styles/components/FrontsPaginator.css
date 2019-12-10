@@ -1,0 +1,17 @@
+.FrontsPaginator {
+  padding: 2rem 0;
+  text-align: center;
+
+  &__button {
+    padding: 1rem;
+    display: block;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: var(--color__accent);
+  }
+
+  &__end {
+    font-style: italic;
+  }
+}

@@ -1,0 +1,12 @@
+:root {
+  
+  /* stylelint-disable value-keyword-case */
+  --typeface__display: -apple-system, BlinkMacSystemFont,
+  'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+  'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --typeface__headline: 'paralucent-condensed', sans-serif;
+  --typeface__copy: 'ff-tisa-web-pro', sans-serif;
+  /* stylelint-enable value-keyword-case */
+
+  font: 18px / 1.5 var(--type__secondary);
+}

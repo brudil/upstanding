@@ -4,4 +4,19 @@
   &__author {
     display: inline;
   }
+
+  &__link {
+    color: var(--color__secondary);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.Site__main--bitch .Byline {
+  &__link {
+    color: var(--color__secondary--bitch);
+  }
 }

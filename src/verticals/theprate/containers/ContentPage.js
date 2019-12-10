@@ -1,115 +1,67 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
-import TimeAgo from 'react-timeago';
-import { setContent } from '../../../core/actions';
-import Document from '../components/Spectrum/Document';
-import Byline from '../components/Byline';
+import PropTypes from 'prop-types';
 import LoadingIndicator from '../components/LoadingIndicator';
-import Headline from '../components/Headline';
-import FluidImage from '../components/FluidImage';
-import { imgixURL } from '../../../core/components/utils';
-import ErrorPage from '../../../core/components/ErrorPage';
+import ContentPageComponent from '../components/ContentPage';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import { Redirect, withRouter } from 'react-router-dom';
+import getPathForContent from '../utils/getPathForContent';
+import ErrorPage from '../components/ErrorPage';
 
 class ContentPage extends React.Component {
-  componentWillMount() {
-    this.props.setContent(this.props.routeParams.contentId);
-  }
-
   render() {
-    const { content, isLoading, didFailToLoad } = this.props;
+    const { data: { loading, error }, data } = this.props;
 
-    if (didFailToLoad) {
-      return <ErrorPage statusCode={didFailToLoad} />;
-    }
-
-    if (isLoading || content === undefined) {
+    if (loading) {
       return <LoadingIndicator />;
     }
 
-    const imageHeight = 400;
-    const imageWidth = 880;
-    const posterImageUrl = imgixURL(content.poster_image.resource_name, {
-      w: imageWidth,
-      h: imageHeight,
-    });
+    if (error) {
+      return <ErrorPage statusCode={404} />;
+    }
 
-    return (
-      <div className="Main">
-        <Helmet title={content.headline} />
-        <div className="ContentPage Container">
-          <Headline headline={content.headline} />
-          <div className="Content__metadata-m">
-            <span>Written by </span>
-            <Byline
-              className="ContentHeader__byline"
-              authors={content.authors}
-            />
-            <span> / </span>
-            <TimeAgo date={content.published} />
-          </div>
+    const container = data.vertical.content;
+    const content = container.content;
 
-          <div className="ContentPage__primary">
-            <FluidImage
-              src={posterImageUrl}
-              role="presentation"
-              ratio={imageHeight / imageWidth}
-            />
-            <div className="Content">
-              <div className="Content__metadata">
-                <dl className="Content__metadata-list">
-                  <dt>Written by</dt>
-                  <dd>
-                    <Byline
-                      className="ContentHeader__byline"
-                      authors={content.authors}
-                    />
-                  </dd>
-                  <dt>Published</dt>
-                  <dd>
-                    <TimeAgo date={content.published} />
-                  </dd>
-                  <dt>Section</dt>
-                  <dd>
-                    {content.section.title}
-                  </dd>
-                </dl>
-              </div>
-              <div className="Content__body">
-                <Document document={content.spectrum_document} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    if (
+      this.props.match.params.form !== content.form.toLowerCase() ||
+      this.props.match.params[0] !== content.slug
+    ) {
+      return <Redirect status={301} to={getPathForContent(container)} />;
+    }
+
+    return <ContentPageComponent container={container} content={content} />;
   }
 }
 
 ContentPage.propTypes = {
-  setContent: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  content: PropTypes.object.isRequired,
-  routeParams: PropTypes.object.isRequired,
-  didFailToLoad: PropTypes.number.isRequired,
+  data: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+  }).isRequired,
 };
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      setContent,
-    },
-    dispatch
-  );
-}
+const ContentPageData = gql`
+  query ContentPage($identifier: String, $contentId: Int) {
+    vertical(identifier: $identifier) {
+      content(contentId: $contentId) {
+        contentId
+        publishedDate
+        content {
+          ...ContentPage
+        }
+      }
+    }
+  }
+  ${ContentPageComponent.fragments.ContentPage}
+`;
 
-export default connect(
-  (state, props) => ({
-    isLoading: state.content.isLoading,
-    didFailToLoad: state.content.failedLoads[props.params.contentId],
-    content: state.entities.content[props.params.contentId],
+const ContentWithData = graphql(ContentPageData, {
+  options: ({ match: { params: { contentId } } }) => ({
+    variables: {
+      identifier: 'thedrab',
+      contentId,
+    },
   }),
-  mapDispatchToProps
-)(ContentPage);
+})(ContentPage);
+
+export default withRouter(ContentWithData);

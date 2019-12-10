@@ -1,20 +1,36 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { connect } from 'react-redux';
-import { imgixURL } from '../../../../../core/components/utils';
-import FluidImage from '../../FluidImage';
+import cx from 'classnames';
+import { OneImage } from '../../../../../core/components/OneImage';
 
-function ImageBlock(props) {
-  const { data, image } = props;
+function ImageBlock({ data, resources }) {
+  const image = resources.lowdownimages[data.resource.id];
 
   return (
-    <figure>
-      <FluidImage
-        src={imgixURL(image.resource_name, { w: 800 })}
-        ratio={image.height / image.width}
+    <figure className={cx('ImageBlock', {
+      'ImageBlock--content': data.container === 'CONTENT',
+      'ImageBlock--container': data.container === 'CONTAINER',
+      'ImageBlock--bleed': data.container === 'BLEED',
+    })}>
+      <OneImage
+        src={image.resourceName}
+        alt={data.alt.text}
+        title={data.title.text}
+        aspectRatio={image}
       />
-      <figcaption>
-        {data.caption.text}
+      <figcaption className="ImageBlock__meta">
+        <span className="ImageBlock__caption">
+          {data.caption.text}
+        </span>
+        <span className="ImageBlock__credit">
+          {image.creditUrl
+            ? <a href={image.creditUrl}>
+                {image.creditTitle || 'Credit'}
+              </a>
+            : <span>
+                {image.creditTitle}
+              </span>}
+        </span>
       </figcaption>
     </figure>
   );
@@ -25,6 +41,4 @@ ImageBlock.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-export default connect((state, ownProps) => ({
-  image: state.entities.images[ownProps.data.resource.id] || null,
-}))(ImageBlock);
+export default ImageBlock;

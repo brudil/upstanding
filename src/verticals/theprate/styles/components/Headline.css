@@ -1,14 +1,14 @@
 .Headline {
   color: var(--color__accent);
   font-family: var(--typeface__headline);
-  font-size: ms(3) rem;
+  font-size: 1.2rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
   margin-top: 0;
   @media screen and (min-width: 820px) {
-    font-size: ms(4) rem;
+    font-size: 1.4rem;
   }
   @media screen and (min-width: 1024px) {
-    font-size: ms(5) rem;
+    font-size: 1.6rem;
   }
 }

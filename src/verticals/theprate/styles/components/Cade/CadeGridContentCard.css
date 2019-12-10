@@ -1,3 +1,5 @@
+@import '../../core/color.css';
+
 .CadeGridContentCard {
   margin-bottom: 2.5rem;
 
@@ -9,7 +11,7 @@
   &__headline {
     font-family: var(--typeface__headline);
     color: var(--color__accent);
-    font-weight: 500;
+    font-weight: 600;
     font-size: ms(2)rem;
     margin-top: 0.5rem;
     margin-bottom: 1rem;

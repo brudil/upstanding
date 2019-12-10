@@ -27,11 +27,11 @@ function FrontGridContent(props) {
   return (
     <li className={cx('FrontGridContent', props.className)}>
       <Link to={`/${forms[content.form]}/${content.slug}-${content.id}`}>
-        <FluidImage
+        <OneImage
           className="FrontGridContent__poster"
-          src={imgixURL(content.poster_image.resource_name, imageSettings)}
+          src={content.poster_image.resource_name}
           role="presentation"
-          ratio={171 / 281}
+          aspectRatio={AspectRatio.r20by9}
         />
         <h2 className="FrontGridContent__headline">
           {content.headline}

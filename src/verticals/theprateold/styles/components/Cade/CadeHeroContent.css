@@ -1,0 +1,56 @@
+.CadeHeroContent {
+  font-size: ms(2)rem;
+  margin-bottom: ms(1)em;
+  position: relative;
+
+  @media screen and (min-width: 1280px) {
+    font-size: ms(4)rem;
+  }
+
+  & > a {
+    text-decoration: none;
+  }
+
+  &__headline {
+    font-family: var(--typeface__headline);
+    font-weight: 500;
+    color: var(--color__accent);
+
+    @media screen and (min-width: 1024px) {
+      margin-top: 0.8em;
+      margin-bottom: 0;
+      padding: 0 0.5em;
+      box-decoration-break: clone;
+      background: white;
+      display: inline;
+      position: relative;
+      max-width: 80%;
+      line-height: 1.4;
+      box-shadow: 0 0 10px 0px rgba(20, 20, 20, 0.1);
+    }
+  }
+
+  &__poster {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  &__meta {
+    color: var(--color__secondary);
+    font-size: ms(0)rem;
+
+    @media screen and (min-width: 1024px) {
+      display: none;
+    }
+  }
+
+  &__headline-container {
+    @media screen and (min-width: 1024px) {
+      position: absolute;
+      top: ms(1)rem;
+      left: ms(1)rem;
+    }
+  }
+}
+

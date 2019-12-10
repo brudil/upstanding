@@ -1,0 +1,19 @@
+@import '../core/color.css';
+@import '../core/typography.css';
+
+html {
+  font-size: 16px;
+
+  @media screen and (max-width: 800px) {
+    font-size: 15px;
+  }
+  @media screen and (max-width: 420px) {
+    font-size: 14px;
+  }
+}
+
+body {
+  background-color: var(--color__background);
+  color: var(--color__text-base);
+  font-family: var(--typeface__display);
+}

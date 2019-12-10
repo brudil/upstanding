@@ -1,10 +1,11 @@
 .CadeHeroContent {
-  font-size: ms(2)rem;
-  margin-bottom: ms(1)em;
+  font-size: 0.6rem;
+  margin-bottom: 1lh;
   position: relative;
+  line-height: 1.2;
 
   @media screen and (min-width: 1280px) {
-    font-size: ms(4)rem;
+    font-size: 2rem;
   }
 
   & > a {
@@ -13,20 +14,17 @@
 
   &__headline {
     font-family: var(--typeface__headline);
-    font-weight: 500;
+    font-weight: 600;
     color: var(--color__accent);
 
     @media screen and (min-width: 1024px) {
-      margin-top: 0.8em;
+      margin-top: 0;
       margin-bottom: 0;
       padding: 0 0.5em;
-      box-decoration-break: clone;
       background: white;
-      display: inline;
+      display: inline-block;
       position: relative;
-      max-width: 80%;
-      line-height: 1.4;
-      box-shadow: 0 0 10px 0px rgba(20, 20, 20, 0.1);
+      max-width: 60%;
     }
   }
 
@@ -38,7 +36,7 @@
 
   &__meta {
     color: var(--color__secondary);
-    font-size: ms(0)rem;
+    font-size: 0.9rem;
 
     @media screen and (min-width: 1024px) {
       display: none;
@@ -47,9 +45,8 @@
 
   &__headline-container {
     @media screen and (min-width: 1024px) {
-      position: absolute;
-      top: ms(1)rem;
-      left: ms(1)rem;
+      position: relative;
+      top: -3lh;
     }
   }
 }
