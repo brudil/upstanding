@@ -2,7 +2,7 @@ const webpack = require('webpack');
 
 const path = require('path');
 const _ = require('lodash');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const NODE_ENV = process.env.NODE_ENV;
 const webpackServerConfig = require('./webpack-isomorphic-tools-configuration');
@@ -35,7 +35,7 @@ module.exports = {
     //   'babel-polyfill',
     //   './src/verticals/theprate/application.js',
     // ],
-    theprate: ['babel-polyfill', './src/verticals/theprate/application.js'],
+    theprate: ['./src/verticals/theprate/application.js'],
   },
 
   output: {
@@ -64,19 +64,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.json$/,
-        loader: 'json-loader',
-      },
-      {
         test: /\.tsx?$/,
         use: [
           {
-            loader: 'awesome-typescript-loader?useBabel=true&useCache=true',
-            options: {
-              useBabel: true,
-              useCache: true,
-              reportFiles: ['src/**/*.{ts,tsx}'],
-            },
+            loader: 'ts-loader',
           },
         ],
       },
@@ -87,10 +78,11 @@ module.exports = {
       },
       {
         test: /\.css/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader?importLoaders=1!postcss-loader',
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          {loader:'css-loader', options: { importLoaders: true }},
+          'postcss-loader'
+        ]
       },
       {
         test: /images/,

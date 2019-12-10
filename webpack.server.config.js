@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const config = require('./webpack.base.config.js');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var nodeExternals = require('webpack-node-externals');
 
 const SaveAssetsJson = require('assets-webpack-plugin');
@@ -26,17 +26,15 @@ config.node = {
 };
 
 config.entry = {
-  // theprate: [
-  //   'babel-polyfill',
-  //   './src/verticals/theprate/application.js',
-  // ],
-  main: ['babel-polyfill', './src/server-setup.js'],
+  main: ['./src/server-setup.js'],
 },
 
 
 config.plugins = config.plugins.concat([
-  new ExtractTextPlugin('[name].[contenthash].css'),
-  new SaveAssetsJson({
+  new MiniCssExtractPlugin({
+    filename: '[name].[contenthash].css',
+  }),
+    new SaveAssetsJson({
     path: process.cwd(),
     filename: 'server-assets.json',
   }),

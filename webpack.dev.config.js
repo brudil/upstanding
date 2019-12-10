@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const config = require('./webpack.base.config.js');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 if (process.env.NODE_ENV === 'xtest') {
   config.entry = [
@@ -14,7 +14,9 @@ if (process.env.NODE_ENV === 'xtest') {
 config.devtool = 'inline-source-map';
 
 config.plugins = config.plugins.concat([
-  new ExtractTextPlugin('[name].style.css'),
+  new MiniCssExtractPlugin({
+    filename: '[name].style.css'
+  }),
   new webpack.DefinePlugin({
     'process.env.LOWDOWN_HOST': "'http://localhost:8000'",
   }),

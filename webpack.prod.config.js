@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const config = require('./webpack.base.config.js');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const SaveAssetsJson = require('assets-webpack-plugin');
 
@@ -16,11 +16,12 @@ config.output = {
 };
 
 config.plugins = config.plugins.concat([
-  new ExtractTextPlugin('[name].[contenthash].css'),
+  new MiniCssExtractPlugin({
+    filename: '[name].[contenthash].css',
+  }),
   new webpack.DefinePlugin({
     'process.env.LOWDOWN_HOST': `'${process.env.LOWDOWN_HOST}'`,
   }),
-  new webpack.optimize.UglifyJsPlugin({ output: { comments: false } }),
   new SaveAssetsJson({
     path: process.cwd(),
     filename: 'assets.json',

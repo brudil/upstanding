@@ -1,7 +1,5 @@
 process.env.BABEL_ENV = 'server';
 
-require('babel-register');
-require('babel-polyfill');
 const WebpackTools = require('webpack-isomorphic-tools');
 const webpackServerConfig = require('../webpack-isomorphic-tools-configuration');
 
