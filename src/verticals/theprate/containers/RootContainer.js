@@ -35,7 +35,7 @@ function RootContainer() {
       /> */}
       <Switch>
         <Route path="/bitch"  component={(props) => (
-          <div>
+          <React.Fragment>
             <Helmet
               titleTemplate="%s | Bitch"
               defaultTitle="Bitch"
@@ -60,10 +60,10 @@ function RootContainer() {
               </Switch>
             </div>
             <Footer />
-          </div>
+          </React.Fragment>
         )}/>
         <Route path="/" component={() => (
-          <div>
+          <React.Fragment>
             <Header />
             <div className="Site__main">
               <Switch>
@@ -83,7 +83,7 @@ function RootContainer() {
               </Switch>
             </div>
             <Footer />
-          </div>
+          </React.Fragment>
         )}/>
       </Switch>
     </div>
