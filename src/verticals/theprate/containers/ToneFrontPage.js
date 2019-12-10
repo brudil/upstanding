@@ -2,17 +2,42 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FrontContainer from '../components/FrontContainer';
 import LoadingIndicator from '../components/LoadingIndicator';
-import { graphql } from 'react-apollo';
+import { graphql, useQuery } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import FrontsHeader from '../components/FrontsHeader';
 import ErrorPage from "../components/ErrorPage";
 import NoContent from "../components/NoContent";
 import {FrontsPaginator} from "../components/FrontsPaginator";
 
-class HomePage extends React.Component {
-  render() {
-    const { data: { loading, vertical, error, loadMore } } = this.props;
+const HomePageData = gql`
+  query FrontContent($identifier: String, $tone: Tone, $cursor: String) {
+    vertical(identifier: $identifier) {
+      allContent(tone: $tone, first: 15, after: $cursor) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+        edges {
+          node {
+            ...FrontsContent
+          }
+        }
+      }
+    }
+  }
+  ${FrontContainer.fragments.content}
+`;
+
+
+const HomePage = () =>  {
+    const { data, loading, error } = useQuery(HomePageData, {
+      variables: {
+        identifier: 'thedrab',
+        tone: props.match.params.tone.toUpperCase(),
+        channel: props.match.url.indexOf('/bitch') === 0 ? 'BITCH' : null
+      },
+    });
     if (loading || !vertical) {
       return <LoadingIndicator />;
     }
@@ -35,46 +60,13 @@ class HomePage extends React.Component {
           ? <FrontContainer title="Latest" content={nodes} />
           : <NoContent />}
 
-        <FrontsPaginator hasMore={vertical.allContent.pageInfo.hasNextPage} loadMore={loadMore} />
+       {/* { <FrontsPaginator hasMore={vertical.allContent.pageInfo.hasNextPage} loadMore={loadMore} />} */}
       </div>
     );
   }
-}
 
-HomePage.propTypes = {
-  data: PropTypes.shape({
-    loading: PropTypes.bool.isRequired,
-  }).isRequired,
-};
-
-const HomePageData = gql`
-  query FrontContent($identifier: String, $tone: Tone, $cursor: String) {
-    vertical(identifier: $identifier) {
-      allContent(tone: $tone, first: 15, after: $cursor) {
-        pageInfo {
-          hasNextPage
-          endCursor
-        }
-        edges {
-          node {
-            ...FrontsContent
-          }
-        }
-      }
-    }
-  }
-  ${FrontContainer.fragments.content}
-`;
-
-const HomepageWithData = graphql(HomePageData, {
-  options: props => ({
-    variables: {
-      identifier: 'thedrab',
-      tone: props.match.params.tone.toUpperCase(),
-      channel: props.match.url.indexOf('/bitch') === 0 ? 'BITCH' : null
-    },
-  }),
-  props({data: { vertical, loading, fetchMore }, ownProps: { match } }) {
+  /*
+    props({data: { vertical, loading, fetchMore }, ownProps: { match } }) {
     return {data: {
         vertical,
         loading,
@@ -103,7 +95,6 @@ const HomepageWithData = graphql(HomePageData, {
           })
         }
       }};
-  }
-})(HomePage);
+ */
 
-export default HomepageWithData;
+export default HomePage;

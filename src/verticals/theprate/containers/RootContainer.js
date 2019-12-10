@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { Route, Switch } from 'react-router-dom';
 import Header from '../components/Header';
 import BitchHeader from '../components/bitch/Header';
@@ -21,7 +21,7 @@ import NotFoundPage from './NotFoundPage';
 function RootContainer() {
   return (
     <div className="Site">
-      <Helmet
+      {/* <Helmet
         htmlAttributes={{ lang: 'en' }}
         titleTemplate="%s | The Drab"
         defaultTitle="The Drab"
@@ -32,7 +32,7 @@ function RootContainer() {
           ...dnsPrefetchLinks,
         ]}
         meta={[...brandingMeta]}
-      />
+      /> */}
       <Switch>
         <Route path="/bitch"  component={(props) => (
           <div>

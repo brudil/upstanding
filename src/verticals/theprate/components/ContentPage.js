@@ -1,5 +1,5 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import gql from 'graphql-tag';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';

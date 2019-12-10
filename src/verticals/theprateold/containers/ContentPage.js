@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import TimeAgo from 'react-timeago';
 import { setContent } from '../../../core/actions';
 import Document from '../components/Spectrum/Document';

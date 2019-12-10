@@ -4,7 +4,7 @@ import FrontContainer from '../components/FrontContainer';
 import LoadingIndicator from '../components/LoadingIndicator';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import FrontsHeader from '../components/FrontsHeader';
 import ErrorPage from '../components/ErrorPage';
 import NoContent from '../components/NoContent';

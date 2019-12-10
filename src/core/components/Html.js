@@ -2,21 +2,22 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import serialize from 'serialize-javascript';
-import Helmet from 'react-helmet';
+import { HelmetProvider } from 'react-helmet-async';
 
 function Html(props) {
   const { vertical, assets, component, store, client } = props;
   const content = component ? ReactDOM.renderToString(component) : '';
-  const head = Helmet.rewind();
+  const helmetContext = {}
 
   return (
+    <HelmetProvider context={helmetContext}>
     <html lang="en">
       <head>
-        {head.base.toComponent()}
+        {/* {head.base.toComponent()}
         {head.title.toComponent()}
         {head.meta.toComponent()}
         {head.link.toComponent()}
-        {head.script.toComponent()}
+        {head.script.toComponent()} */}
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* styles (will be present only in production with webpack extract text plugin) */}
@@ -49,6 +50,7 @@ function Html(props) {
         <script src={assets[vertical.slug].js} charSet="UTF-8" />
       </body>
     </html>
+    </HelmetProvider>
   );
 }
 

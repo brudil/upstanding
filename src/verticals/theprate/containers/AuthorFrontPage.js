@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import FrontContainer from '../components/FrontContainer';
 import LoadingIndicator from '../components/LoadingIndicator';
 import FrontsHeader from '../components/FrontsHeader';

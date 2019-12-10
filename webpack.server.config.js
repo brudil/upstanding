@@ -11,6 +11,7 @@ config.profile = false;
 config.devtool = '#source-map';
 
 config.target = 'node';
+config.mode = 'development'
 
 config.externals = [nodeExternals()];
 

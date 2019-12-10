@@ -16,6 +16,7 @@ import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
 import { StaticRouter } from 'react-router';
+import { HelmetProvider } from 'react-helmet-async';
 import Raven from 'raven';
 import interactiveFrame from 'interactive-frame';
 import Html from './core/components/Html';
@@ -81,6 +82,8 @@ function getVertical(host, verticals) {
     }
   }
 
+  console.log(host, 'not found within verticals')
+
   return null;
 }
 
@@ -91,6 +94,7 @@ function getClientVerticalConfig(vertical) {
 
 export default function server({ verticals, port }) {
   const app = express();
+  const helmetContext = {};
 
   Raven.config(
     'https://d66a04a503884527974744137198af8b:f208cb25f879498191f64f06d678f2c6@app.getsentry.com/89728'
@@ -101,6 +105,12 @@ export default function server({ verticals, port }) {
   /* handle rendering of application */
   function handleRender(req, res) {
     const vertical = getVertical(req.hostname, verticals);
+
+    if (!vertical) {
+      res.status(404).send('vertical not found')
+        return;
+    }
+
     const context = {};
     console.log('Vertical: ', vertical.name);
     console.log('Serving: ', req.url);
@@ -125,11 +135,14 @@ export default function server({ verticals, port }) {
     function handle404Error() {
       res.status(404).send(
         renderFullPage(
+          <HelmetProvider context={helmetContext}>
+
           <Provider store={store} key="provider">
             <StaticRouter location={req.url} context={context}>
               <vertical.Application />
             </StaticRouter>
-          </Provider>,
+          </Provider>
+          </HelmetProvider>,
           store
         )
       );
@@ -142,6 +155,7 @@ export default function server({ verticals, port }) {
 
     // todo: this might not be 200, check context
     getDataFromTree(
+      <HelmetProvider context={helmetContext}>
       <Provider store={store} key="provider">
         <ApolloProvider client={client} key="apollo">
           <StaticRouter location={req.url} context={context}>
@@ -149,18 +163,21 @@ export default function server({ verticals, port }) {
           </StaticRouter>
         </ApolloProvider>
       </Provider>
+      </HelmetProvider>
     )
       .then(() => {
         res.status(200).send(
           renderFullPage(
             vertical,
-            <Provider store={store} key="provider">
-              <ApolloProvider client={client} key="apollo">
-                <StaticRouter location={req.url} context={context}>
-                  <vertical.Application />
-                </StaticRouter>
-              </ApolloProvider>
-            </Provider>,
+            <HelmetProvider context={helmetContext}>
+              <Provider store={store} key="provider">
+                <ApolloProvider client={client} key="apollo">
+                  <StaticRouter location={req.url} context={context}>
+                    <vertical.Application />
+                  </StaticRouter>
+                </ApolloProvider>
+              </Provider>
+            </HelmetProvider>,
             store,
             client
           )

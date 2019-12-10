@@ -2,14 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LoadingIndicator from '../components/LoadingIndicator';
 import ContentPageComponent from '../components/ContentPage';
-import { graphql } from 'react-apollo';
+import { graphql, useQuery } from 'react-apollo';
 import gql from 'graphql-tag';
 import { withRouter } from 'react-router-dom';
 import ErrorPage from '../components/ErrorPage';
 
-class PreviewContentPage extends React.Component {
-  render() {
-    const { data: { loading, error }, data } = this.props;
+const PreviewContentPageData = gql`
+  query ContentPage($revisionId: Int, $previewKey: String) {
+    previewContent(revisionId: $revisionId, previewKey: $previewKey) {
+      ...ContentPage
+    }
+  }
+  ${ContentPageComponent.fragments.ContentPage}
+`;
+
+const PreviewContentPage = ({ match: { revisionId, preview } }) => {
+    const { data, loading, error } = useQuery(PreviewContentPage, {
+      variables: {
+        identifier: 'thedrab',
+        revisionId,
+        previewKey,
+      },
+    });
 
     if (loading) {
       return <LoadingIndicator />;
@@ -47,32 +61,6 @@ class PreviewContentPage extends React.Component {
         preview
       />
     );
-  }
 }
 
-PreviewContentPage.propTypes = {
-  data: PropTypes.shape({
-    loading: PropTypes.bool.isRequired,
-  }).isRequired,
-};
-
-const PreviewContentPageData = gql`
-  query ContentPage($revisionId: Int, $previewKey: String) {
-    previewContent(revisionId: $revisionId, previewKey: $previewKey) {
-      ...ContentPage
-    }
-  }
-  ${ContentPageComponent.fragments.ContentPage}
-`;
-
-const PreviewContentWithData = graphql(PreviewContentPageData, {
-  options: ({ match: { params: { revisionId, previewKey } } }) => ({
-    variables: {
-      identifier: 'thedrab',
-      revisionId,
-      previewKey,
-    },
-  }),
-})(PreviewContentPage);
-
-export default withRouter(PreviewContentWithData);
+export default PreviewContentPage;

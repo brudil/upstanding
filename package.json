@@ -86,7 +86,7 @@
     "mini-css-extract-plugin": "^0.8.0",
     "postcss-nested": "^4.2.1",
     "prettier": "^1.10.2",
-    "react-dom": "^15.4.1",
+    "react-helmet-async": "^1.0.4",
     "react-hot-loader": "^4.12.18",
     "recompose": "^0.30.0",
     "redux-devtools": "^3.4.1",
@@ -105,8 +105,8 @@
     "dist": "export NODE_ENV=production && `npm bin`/webpack --config=webpack.prod.config ",
     "serve": "NODE_ENV=development `npm bin`/webpack-dev-server --config webpack.dev.config --history-api-fallback --hot --port 8088",
     "build-server": "NODE_ENV=production `npm bin`/webpack --config webpack.server.config",
-    "build-server-dev": "NODE_ENV=development LOWDOWN_HOST=\"http://localhost:8000\" `npm bin`/webpack --config webpack.server.config",
-    "ss": "NODE_ENV=development nodemon src/server-entry.js",
+    "build-server-dev": "NODE_ENV=development LOWDOWN_HOST=\"https://theprate.com\" `npm bin`/webpack --config webpack.server.config",
+    "ss": "NODE_ENV=development yarn nodemon src/server-entry.js",
     "heroku-postbuild": "yarn dist && yarn build-server"
   },
   "repository": {
@@ -132,5 +132,8 @@
     "collectCoverageFrom": [
       "{generator,src}/**/*.{js,jsx}"
     ]
+  },
+  "peerDependencies": {
+    "react-helmet-async": "^1.0.4"
   }
 }

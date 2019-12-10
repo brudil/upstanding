@@ -24,6 +24,7 @@ export default {
     hosts: [
       'theprate.com',
       'www.theprate.com',
+      'theprate.local',
     ],
   },
 };

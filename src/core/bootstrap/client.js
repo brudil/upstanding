@@ -16,6 +16,7 @@ import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import Raven from 'raven-js';
 import ScrollToTop from '../components/ScrollToTop';
+import { HelmetProvider } from 'react-helmet-async';
 
 import 'lazysizes/plugins/bgset/ls.bgset';
 // @ts-ignore
@@ -104,7 +105,9 @@ function client({ name, slug, Application, tracking }) {
   initGA(history);
 
   ReactDOM.hydrate(
+    <HelmetProvider>
     <Provider store={store}>
+
       <ApolloProvider client={aClient}>
         <Router history={history}>
           <ScrollToTop>
@@ -112,7 +115,8 @@ function client({ name, slug, Application, tracking }) {
           </ScrollToTop>
         </Router>
       </ApolloProvider>
-    </Provider>,
+    </Provider>
+    </HelmetProvider>,
     document.getElementById('app')
   );
 }

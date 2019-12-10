@@ -4,7 +4,27 @@ import gql from 'graphql-tag';
 import FrontsContent from './FrontsContent/index';
 import FrontContainer from './FrontContainer';
 
+const RelatedContentQuery = gql`
+query RelatedContent($contentId: Int) {
+  vertical(identifier: "thedrab") {
+    content(contentId: $contentId) {
+      relatedContent {
+        ...FrontsContent
+      }
+    }
+  }
+}
+${FrontContainer.fragments.content}
+`
+
 function RelatedContent(props) {
+  const { data, loading, error } = useQuery(RelatedContentQuery, {
+    variables: {
+      contentId: props.contentId,
+    },
+    ssr: false,
+  })
+
   if (props.data.loading) {
     return null;
   }
@@ -35,25 +55,4 @@ function RelatedContent(props) {
   );
 }
 
-export default graphql(
-  gql`
-  query RelatedContent($contentId: Int) {
-    vertical(identifier: "thedrab") {
-      content(contentId: $contentId) {
-        relatedContent {
-          ...FrontsContent
-        }
-      }
-    }
-  }
-  ${FrontContainer.fragments.content}
-`,
-  {
-    options: props => ({
-      variables: {
-        contentId: props.contentId,
-      },
-      ssr: false,
-    }),
-  }
-)(RelatedContent);
+export default RelatedContent;

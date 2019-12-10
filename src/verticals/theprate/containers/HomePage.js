@@ -5,7 +5,7 @@ import LoadingIndicator from '../components/LoadingIndicator';
 import { FrontsPaginator } from '../components/FrontsPaginator';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 class HomePage extends React.Component {
   render() {
