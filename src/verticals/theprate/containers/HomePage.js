@@ -21,8 +21,8 @@ class HomePage extends React.Component {
     return (
       <div className="Main">
         <Helmet>
-          <title>{isBitch ? 'Bitch: for gals who want gendered media verticals' : 'The Drab | Be content, not content'}</title>
-          <meta property="og:description" content={'The Drab'} />
+          <title>{isBitch ? 'Bitch: for gals who want gendered media verticals' : 'The Prate | Be content, not content'}</title>
+          <meta property="og:description" content={'The Prate'} />
         </Helmet>
         {nodes.length > 0
           ? <FrontContainer title="Latest" content={nodes} />

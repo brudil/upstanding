@@ -26,9 +26,9 @@ class HomePage extends React.Component {
     return (
       <div className="Main">
         <Helmet>
-          <title>The Drab | Be content, not content</title>
+          <title>The Prate | Be content, not content</title>
           <meta property="og:image" content="" />
-          <meta property="og:description" content={'The Drab'} />
+          <meta property="og:description" content={'The Prate'} />
         </Helmet>
         <FrontsHeader title={this.props.match.params.section} kicker="Section" />
 

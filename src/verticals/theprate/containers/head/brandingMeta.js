@@ -1,11 +1,11 @@
 export default [
   {
     name: 'apple-mobile-web-app-title',
-    content: 'The Drab',
+    content: 'The Prate',
   },
   {
     name: 'application-name',
-    content: 'The Drab',
+    content: 'The Prate',
   },
   {
     name: 'theme-color',
@@ -13,7 +13,7 @@ export default [
   },
   {
     property: 'og:site_name',
-    content: 'The Drab',
+    content: 'The Prate',
   },
   {
     property: 'fb:app_id',

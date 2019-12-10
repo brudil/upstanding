@@ -23,8 +23,8 @@ function RootContainer() {
     <div className="Site">
       {/* <Helmet
         htmlAttributes={{ lang: 'en' }}
-        titleTemplate="%s | The Drab"
-        defaultTitle="The Drab"
+        titleTemplate="%s | The Prate"
+        defaultTitle="The Prate"
         script={[]}
         link={[
           { rel: 'stylesheet', href: 'https://use.typekit.net/cob0eos.css' },
