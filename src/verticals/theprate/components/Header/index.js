@@ -1,7 +1,7 @@
 import React from 'react';
 import sample from 'lodash/sample';
 import { Link } from 'react-router-dom';
-import Logo from '../Logo';
+import Logo from '../../vectors/logotype.svg';
 import taglines from './taglines';
 
 const Nav = () =>

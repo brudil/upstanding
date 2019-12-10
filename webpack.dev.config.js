@@ -23,13 +23,4 @@ config.plugins = config.plugins.concat([
   new webpack.NoEmitOnErrorsPlugin(),
 ]);
 
-/* config.module.rules = config.module.rules.concat([
-  {
-    test: /\.js$/,
-    loader: 'eslint-loader',
-    exclude: /node_modules/,
-    enforce: 'pre',
-  },
-]);
-*/
 module.exports = config;

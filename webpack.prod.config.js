@@ -28,8 +28,4 @@ config.plugins = config.plugins.concat([
   }),
 ]);
 
-config.module.rules = config.module.rules.concat([
-//  {test: /\.js?$/, loaders: [ 'babel'], exclude: /node_modules/}
-]);
-
 module.exports = config;

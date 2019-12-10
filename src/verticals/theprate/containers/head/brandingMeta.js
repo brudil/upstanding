@@ -9,7 +9,7 @@ export default [
   },
   {
     name: 'theme-color',
-    content: '#6D4D2D',
+    content: '#6A00DE',
   },
   {
     property: 'og:site_name',

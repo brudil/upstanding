@@ -81,7 +81,27 @@ module.exports = {
         ]
       },
       {
+        test: /\.svg$/,
+        include: /vectors/,
+        use: [
+          'babel-loader',
+          {
+            loader: '@svgr/webpack',
+            options: {
+              // icon: true,
+              svgo: true,
+              dimensions: false,
+              svgoConfig: {
+                plugins: [{removeViewBox: false}],
+              },
+              prettier: false,
+            },
+          },
+        ],
+      },
+      {
         test: /images/,
+        exclude: /vectors/,
         loader: 'file-loader',
       },
     ],
