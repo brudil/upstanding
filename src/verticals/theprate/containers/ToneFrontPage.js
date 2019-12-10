@@ -30,15 +30,15 @@ const HomePageData = gql`
 `;
 
 
-const HomePage = () =>  {
+const HomePage = ({ match }) =>  {
     const { data, loading, error } = useQuery(HomePageData, {
       variables: {
         identifier: 'thedrab',
-        tone: props.match.params.tone.toUpperCase(),
-        channel: props.match.url.indexOf('/bitch') === 0 ? 'BITCH' : null
+        tone: match.params.tone.toUpperCase(),
+        channel: match.url.indexOf('/bitch') === 0 ? 'BITCH' : null
       },
     });
-    if (loading || !vertical) {
+    if (loading || !data) {
       return <LoadingIndicator />;
     }
 
@@ -46,7 +46,7 @@ const HomePage = () =>  {
       return <ErrorPage status={404} />
     }
 
-    const nodes = vertical.allContent.edges.map(edge => edge.node);
+    const nodes = data.vertical.allContent.edges.map(edge => edge.node);
     return (
       <div className="Main">
         <Helmet>
@@ -54,7 +54,7 @@ const HomePage = () =>  {
           <meta property="og:image" content="" />
           <meta property="og:description" content={'The Drab'} />
         </Helmet>
-        <FrontsHeader title={this.props.match.params.tone} kicker="Tone" />
+        <FrontsHeader title={match.params.tone} kicker="Tone" />
 
         {nodes.length > 0
           ? <FrontContainer title="Latest" content={nodes} />

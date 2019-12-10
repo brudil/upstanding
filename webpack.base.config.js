@@ -31,10 +31,6 @@ module.exports = {
   context: __dirname,
 
   entry: {
-    // theprate: [
-    //   'babel-polyfill',
-    //   './src/verticals/theprate/application.js',
-    // ],
     theprate: ['./src/verticals/theprate/application.js'],
   },
 

@@ -18,7 +18,7 @@ config.plugins = config.plugins.concat([
     filename: '[name].style.css'
   }),
   new webpack.DefinePlugin({
-    'process.env.LOWDOWN_HOST': "'http://localhost:8000'",
+    'process.env.LOWDOWN_HOST': "'https://platform.theprate.com'",
   }),
   new webpack.NoEmitOnErrorsPlugin(),
 ]);

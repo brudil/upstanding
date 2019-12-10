@@ -26,9 +26,8 @@ require('isomorphic-fetch');
 
 const LOWDOWN_HOST = process.env.LOWDOWN_HOST || 'http://localhost:8000';
 
-console.log(fs.existsSync('../assets.json'));
-
-const assets = fs.existsSync('../assets.json') ? JSON.parse(fs.readFileSync('../assets.json', 'utf-8')) : new Proxy({}, {
+const assetPath = path.resolve('assets.json');
+const assets = fs.existsSync(assetPath) ? JSON.parse(fs.readFileSync(assetPath, 'utf-8')) : new Proxy({}, {
   get(target, name) {
     return {
       js: `http://localhost:8088/build/${name}.application.js`,
@@ -36,6 +35,10 @@ const assets = fs.existsSync('../assets.json') ? JSON.parse(fs.readFileSync('../
     }
   }
 });
+
+if (!fs.existsSync(assetPath)) {
+  console.warn('using development assets, unable to find assets.json');
+}
 
 function renderFullPage(vertical, component, store, client) {
   return `
