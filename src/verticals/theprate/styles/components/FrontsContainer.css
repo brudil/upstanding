@@ -1,3 +1,29 @@
-.FrontsContainer {
+.FrontsContainer__hero {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
 
+  @media(--medium) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.FrontsContainer__hero .FrontsContent:first-child {
+  @media(--medium) {
+    grid-column: 1/3;
+  }
+}
+
+.FrontsContainer__grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+
+  @media(--medium) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media(--large) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
